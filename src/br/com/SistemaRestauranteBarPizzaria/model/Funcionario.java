@@ -1,35 +1,24 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
-public abstract class Funcionario extends DadosCadastrais{
-	protected String dataAdimissao;
-	protected String nomeEstabelecimento;
-	protected double CPF;
-	protected double CTPS;//carteira de trabalho e previdência social
-	protected double salario;
+public abstract class Funcionario implements DadosCadastrais{
+	protected String nome;
+	protected String telefone;
+	protected String endereco;
+	protected String dataAdmissao;
+	protected double ctps;
 	
-	protected String getDataAdimissao() {
-		return dataAdimissao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	protected String getNomeEstabelecimento() {
-		return nomeEstabelecimento;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
-	protected double getCPF() {
-		return CPF;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
-
-	protected double getCTPS() {
-		return CTPS;
-	}
-
-	protected double getSalario() {
-		return salario;
-	}
-
-	public abstract void setDataAdimissao(String dataAdimissao);
-	public abstract void setNomeEstabelecimento(String nomeEstabelecimento);
-	public abstract void setCPF(double CPF);
-	public abstract void setCTPS(double CTPS);
-	public abstract void setSalario(double salario);
+	
+	protected abstract void setDataAdmissao(String dataAdmissao);	
+	protected abstract void setCtps(double ctps);		
 }

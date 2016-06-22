@@ -1,24 +1,40 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
-public class Gerente extends Funcionario{
+public class Gerente implements DadosCadastrais{
+	protected String nome;
+	protected String telefone;
+	protected String endereco;
+	protected boolean statusPedido;//se foi entregue ao cliente ou ainda esta na cozinha
 	
-	public void setDataAdimissao(String dataAdimissao) {
-		this.dataAdimissao = dataAdimissao;		
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public void setNomeEstabelecimento(String nomeEstabelecimento) {
-		this.nomeEstabelecimento = nomeEstabelecimento;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
-	public void setCPF(double CPF) {
-		this.CPF = CPF;
-	}
-
-	public void setCTPS(double CTPS) {
-		this.CTPS = CTPS;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 	
-	public void setSalario(double horasTrabalhadas) {
-		this.salario = horasTrabalhadas * 1.5;
+	protected void setStatusPedido(boolean statusPedido){
+		this.statusPedido = statusPedido;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+	
+	public boolean getStatusPedido() {
+		return statusPedido;
 	}
 }
