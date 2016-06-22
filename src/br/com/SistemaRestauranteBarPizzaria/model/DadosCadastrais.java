@@ -1,11 +1,20 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
-interface DadosCadastrais {
-	String getNome();
-	String getTelefone();
-	String getEndereco();
+public abstract class DadosCadastrais {
+	protected String nome;
+	protected String telefone;
+	protected String endereco;
 	
-	void setNome(String nome);
-	void setTelefone(String telefone);
-	void setEndereco(String endereco);
+	protected String getNome() {
+		return nome;
+	}
+	protected String getTelefone() {
+		return telefone;
+	}
+	protected String getEndereco() {
+		return endereco;
+	}
+	protected abstract void setNome(String nome);
+	protected abstract void setTelefone(String telefone);
+	protected abstract void setEndereco(String endereco);	
 }

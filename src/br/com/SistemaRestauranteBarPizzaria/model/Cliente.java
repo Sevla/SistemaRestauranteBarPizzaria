@@ -1,9 +1,6 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
-public class Cliente implements DadosCadastrais{
-	protected String nome;
-	protected String telefone;
-	protected String endereco;
+public class Cliente extends DadosCadastrais{
 	protected double mesa;
 	protected double idOpcao;
 	protected double quantidadeOpcao;
@@ -44,18 +41,6 @@ public class Cliente implements DadosCadastrais{
 	
 	protected void setSugestaoOuReclamacao(String sugestaoOuReclamacao){
 		this.sugestaoOuReclamacao = sugestaoOuReclamacao;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public String getEndereco() {
-		return endereco;
 	}
 	
 	public boolean getEditarPedido(){

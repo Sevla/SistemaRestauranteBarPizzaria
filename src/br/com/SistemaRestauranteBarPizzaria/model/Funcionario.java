@@ -1,9 +1,6 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
-public abstract class Funcionario implements DadosCadastrais{
-	protected String nome;
-	protected String telefone;
-	protected String endereco;
+public abstract class Funcionario extends DadosCadastrais{
 	protected String dataAdmissao;
 	protected double ctps;
 	
