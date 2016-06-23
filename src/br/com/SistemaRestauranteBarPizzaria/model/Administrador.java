@@ -1,25 +1,22 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
-import br.com.SistemaRestauranteBarPizzaria.model.Cardapio;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Administrador extends Funcionario{
 	private static String nomeEstabelecimento;
 	private static String cnpjEstabelecimento;
 	private static String enderecoEstabelecimento;
-	static List<Cardapio> NovoCardapio = new ArrayList<Cardapio>();
-	
+	static Connection conexao;
 	private Scanner leitura = new Scanner(System.in);
+	Administrador administrador = new Administrador();	
 	
-	public void AdicionaFuncionario(){
+	public void AdicionaFuncionario() throws SQLException{
 		Funcionario novoFuncionario = new Funcionario();
 		
 		System.out.println("Digite o nome do Funcionario: ");
 		novoFuncionario.setNome(this.leitura.nextLine());
-		System.out.println("Digite o telefone do Funcionario: ");
-		novoFuncionario.setTelefone(this.leitura.nextLine());
 		System.out.println("Digite o telefone do Funcionario: ");
 		novoFuncionario.setTelefone(this.leitura.nextLine());
 		System.out.println("Digite o CEP do Funcionario: ");
@@ -38,44 +35,58 @@ public class Administrador extends Funcionario{
 		novoFuncionario.setDataAdmissao(this.leitura.nextLine());
 		System.out.println("Digite o numero do CTPS do Funcionario (só numeros!): ");
 		novoFuncionario.setCtps(this.leitura.nextDouble());
+		
+		java.sql.Statement stmt;
+		try {
+			stmt = Administrador.conexao.createStatement();
+			stmt.executeUpdate("INSERT INTO funcionario(nome,telefone,cep,numero,bairro,complemento,cidade,estado,dataAdmissao,ctps)"
+								+ "VALUES('"+novoFuncionario.getNome()+"','"+novoFuncionario.getTelefone()+"','"
+											+novoFuncionario.getCep()+"','"+novoFuncionario.getNumero()+"','"
+											+novoFuncionario.getBairro()+"','"+novoFuncionario.getComplemento()+"','"
+											+novoFuncionario.getCidade()+"','"+novoFuncionario.getEstado()+"','"
+											+novoFuncionario.getDataAdmissao()+"','"+novoFuncionario.getCtps()+"')");
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
+		}
 	}
-	public List<Cardapio> NovoCardapio(){
-		int opcao;
-		boolean novoItem = false;
-		int incrementoIdItemCardapio = 0;
-		Cardapio itemCardapio = new Cardapio();
-		
-		do{
-			System.out.println("Digite o nome do Item: ");
-			itemCardapio.setNomeItemCardapio(this.leitura.nextLine());
-			System.out.println("Digite o valor do Item: ");
-			itemCardapio.setValorItemCardapio(this.leitura.nextDouble());
-			
-			itemCardapio.setIdItemCardapio(this.leitura.nextInt(incrementoIdItemCardapio));
-			incrementoIdItemCardapio++;
-			
-			System.out.println("\nDeseja adicionar novo Item");
-			System.out.println("[1] Sim [2] Não: ");
-			opcao = this.leitura.nextInt();
-			if(opcao == 1){
-				novoItem = true;
-			}
-			else{
-				NovoCardapio.add(itemCardapio);
-			}
-		}while(novoItem);
-		
-		return NovoCardapio;
-	}
-	public void AdicionarDadosEmpresa(){
-		Administrador administrador = new Administrador();
-		
+	public void AdicionarDadosEmpresa() throws SQLException{		
 		System.out.println("Digite o nome da Empresa: ");
 		administrador.setnomeEstabelecimento(this.leitura.nextLine());
 		System.out.println("Digite o CNPJ da Empresa: ");
 		administrador.setCnpjEstabelecimento(this.leitura.nextLine());
 		System.out.println("Digite o Endereço da Empresa: ");
-		Administrador.setEnderecoEstabelecimento(this.leitura.nextLine());
+		administrador.setEnderecoEstabelecimento(this.leitura.nextLine());
+		
+		java.sql.Statement stmt;
+		try {
+			stmt = Administrador.conexao.createStatement();
+			stmt.executeUpdate("INSERT INTO empresa(nomeEstabelecimento,cnpjEstabelecimento,enderecoEstabelecimento)"
+								+ "VALUES('"+administrador.getnomeEstabelecimento()+"','"
+											+administrador.getCnpjEstabelecimento()+"','"
+											+administrador.getEnderecoEstabelecimento()+"')");
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
+		}
+	}
+	public void CriarCardapio() throws SQLException{
+		Cardapio cardapio = new Cardapio();
+		System.out.println("Digite o id do Item do Cardapio: ");
+		cardapio.setIdItemCardapio(this.leitura.nextInt());
+		System.out.println("Digite o Nome do Item do Cardapio: ");
+		cardapio.setNomeItemCardapio(this.leitura.nextLine());
+		System.out.println("Digite o Valor do Item do Cardapio: ");
+		cardapio.setValorItemCardapio(this.leitura.nextDouble());
+		
+		java.sql.Statement stmt;
+		try {
+			stmt = Administrador.conexao.createStatement();
+			stmt.executeUpdate("INSERT INTO cardapio(idItemCardapio,nomeItemCardapio,valorItemCardapio)"
+								+ "VALUES('"+cardapio.getIdItemCardapio()+"','"
+											+cardapio.getNomeItemCardapio()+"','"
+											+cardapio.getValorItemCardapio()+"')");
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
+		}
 	}
 	protected String getnomeEstabelecimento() {
 		return nomeEstabelecimento;
@@ -83,7 +94,7 @@ public class Administrador extends Funcionario{
 	protected String getCnpjEstabelecimento() {
 		return cnpjEstabelecimento;
 	}
-	protected static String getEnderecoEstabelecimento() {
+	protected String getEnderecoEstabelecimento() {
 		return enderecoEstabelecimento;
 	}
 	protected void setnomeEstabelecimento(String nomeEstabelecimento) {
@@ -92,7 +103,7 @@ public class Administrador extends Funcionario{
 	protected void setCnpjEstabelecimento(String cnpjEstabelecimento) {
 		Administrador.cnpjEstabelecimento = cnpjEstabelecimento;
 	}
-	protected static void setEnderecoEstabelecimento(String enderecoEstabelecimento) {
+	protected void setEnderecoEstabelecimento(String enderecoEstabelecimento) {
 		Administrador.enderecoEstabelecimento = enderecoEstabelecimento;
 	}
 }

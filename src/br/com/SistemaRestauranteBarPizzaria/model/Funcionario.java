@@ -4,6 +4,12 @@ public class Funcionario extends DadosCadastrais{
 	protected String dataAdmissao;
 	protected double ctps;
 	
+	protected String getDataAdmissao() {
+		return dataAdmissao;
+	}
+	protected double getCtps() {
+		return ctps;
+	}
 	protected void setNome(String nome){
 		this.nome = nome;
 	}
@@ -33,5 +39,5 @@ public class Funcionario extends DadosCadastrais{
 	}
 	public void setCtps(double ctps) {
 		this.ctps = ctps;
-	}		
+	}
 }

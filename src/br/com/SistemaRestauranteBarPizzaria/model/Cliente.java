@@ -63,18 +63,7 @@ public class Cliente extends DadosCadastrais{
 		}
 	}
 	
-	//Colocar depois em br.com.SistemaRestauranteBarPizzaria.bo.ClienteBO
 	protected void FazerPedido(){
-		int opcao;
-		boolean finalizarPedido = false;
-		Pedido pedido = new Pedido();
-		
-		do{
-			System.out.println("Digite o Numero do Item para Adicionar ao Pedido: ");
-			System.out.println("\nDeseja Cadastrar novo Item ao Pedido");
-			System.out.println("[1] Sim [2] Não: ");
-			opcao = this.leitura.nextInt();
-			if(opcao == 1) finalizarPedido = true;
-		}while(finalizarPedido);		
+			
 	}
 }
