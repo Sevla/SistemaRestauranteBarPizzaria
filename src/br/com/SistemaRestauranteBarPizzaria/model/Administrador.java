@@ -67,6 +67,7 @@ public class Administrador extends Funcionario{
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
 		}
+		//chama a funcao ListaEmpresa(); para listar e informar as empresas na tabela 
 	}
 	public void CriarCardapio() throws SQLException{
 		Cardapio cardapio = new Cardapio();
@@ -83,10 +84,34 @@ public class Administrador extends Funcionario{
 			stmt.executeUpdate("INSERT INTO cardapio(idItemCardapio,nomeItemCardapio,valorItemCardapio)"
 								+ "VALUES('"+cardapio.getIdItemCardapio()+"','"
 											+cardapio.getNomeItemCardapio()+"','"
-											+cardapio.getValorItemCardapio()+"')");
+											+cardapio.getValorItemCardapio()+"');");
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
 		}
+		//chama a funcao ListaCardapio(); para listar e informar o cardapio atual
+	}
+	public void RemoverCardapio() throws SQLException{
+		int itemRemocao;
+		System.out.println("Digite o id do Item do Cardapio que deseja remover: ");
+		itemRemocao = leitura.nextInt();
+		java.sql.Statement stmt;
+		try {
+			stmt = Administrador.conexao.createStatement();
+			stmt.executeUpdate("DELETE FROM cardapio WHERE idItemCardapio ="+itemRemocao+";");
+								
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao excluir Funcionario: "+e.getMessage());
+		}
+		// chama a funcao ListaCardapio(); para listar e informar o cardapio atual
+	}
+	public void ListaCardapio() throws SQLException{
+		
+	}
+	public void ListaFuncionario() throws SQLException{
+		
+	}
+	public void ListaEmpresa() throws SQLException{
+		
 	}
 	protected String getnomeEstabelecimento() {
 		return nomeEstabelecimento;
