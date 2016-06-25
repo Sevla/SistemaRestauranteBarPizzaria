@@ -86,7 +86,7 @@ public class Administrador extends Funcionario{
 											+cardapio.getNomeItemCardapio()+"','"
 											+cardapio.getValorItemCardapio()+"');");
 		} catch (SQLException e) {
-			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
+			throw new SQLException("Erro ao Adicionar Cardapio: "+e.getMessage());
 		}
 		//chama a funcao ListaCardapio(); para listar e informar o cardapio atual
 	}
@@ -100,9 +100,60 @@ public class Administrador extends Funcionario{
 			stmt.executeUpdate("DELETE FROM cardapio WHERE idItemCardapio ="+itemRemocao+";");
 								
 		} catch (SQLException e) {
-			throw new SQLException("Erro ao excluir Funcionario: "+e.getMessage());
+			throw new SQLException("Erro ao excluir Cardapio: "+e.getMessage());
 		}
 		// chama a funcao ListaCardapio(); para listar e informar o cardapio atual
+	}
+	public void AlterarCardapio() throws SQLException{
+		int itemAlteracao;
+		System.out.println("Digite o id do Item do Cardapio que deseja alterar os dados: ");
+		// Verificar a existencia do item no BD;
+		itemAlteracao = leitura.nextInt();
+		java.sql.Statement stmt;
+//Sugestão 1 para a view:		int opcao=0;
+//		while(opcao==0){
+//			System.out.println("Insira uma opção abaixo:"
+//					+ "[1]: Alterar o id do Item;"
+//					+ "[2]: Alterar o nome do Item;"
+//					+ "[3]: Alterar o valor do Item;"
+//					+ "[4]: Sair.");
+//		while(opcao>0 && opcao<4){
+//			switch(opcao){
+//			case 1:
+//				int alteracao;
+//				System.out.println("Insira o novo ID para o Item:");
+//				alteracao=leitura.nextInt();
+//				break;
+//			case 2:
+//				String alteracao;
+//				System.out.println("Insira o novo nome para o Item:");
+//				alteracao=leitura.nextLine();
+//				break;
+//			case 3:
+//				double alteracao;
+//				System.out.println("Insira o novo valor para o Item:");
+//				alteracao=leitura.nextDouble();
+//				break;
+//			default: break;
+//			}
+		
+		System.out.println("Insira um novo ID para o item:");
+		int idAlteracao = leitura.nextInt();
+		System.out.println("Insira um novo nome para o item:");
+		String nomeAlteracao = leitura.nextLine();
+		System.out.println("Insira um novo valor para o item");
+		double valorAlteracao = leitura.nextDouble();
+		
+			try {
+				stmt = Administrador.conexao.createStatement();
+				stmt.executeUpdate("UPDATE FROM cardapio SET"+idAlteracao+","+nomeAlteracao+","+valorAlteracao+" WHERE idItemCardapio ="+itemAlteracao+";");
+									
+			} catch (SQLException e) {
+				throw new SQLException("Erro ao alterar item do Cardapio: "+e.getMessage());
+				}
+			// chama a funcao ListaCardapio(); para listar e informar o cardapio atual
+			}
+		}
 	}
 	public void ListaCardapio() throws SQLException{
 		
