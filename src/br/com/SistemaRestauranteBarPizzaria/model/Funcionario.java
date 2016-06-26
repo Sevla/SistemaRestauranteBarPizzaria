@@ -13,13 +13,13 @@ public class Funcionario extends DadosCadastrais{
 	protected void setNome(String nome){
 		this.nome = nome;
 	}
-	protected void setTelefone(String telefone){
+	protected void setTelefone(int telefone){
 		this.telefone = telefone;
 	}
-	protected void setCep(String cep){
+	protected void setCep(int cep){
 		this.cep = cep;
 	}
-	protected void setNumero(String numero){
+	protected void setNumero(int numero){
 		this.numero = numero;
 	}
 	protected void setBairro(String bairro){

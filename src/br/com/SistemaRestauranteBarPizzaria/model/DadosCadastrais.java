@@ -2,9 +2,9 @@ package br.com.SistemaRestauranteBarPizzaria.model;
 
 public abstract class DadosCadastrais {
 	protected String nome;
-	protected String telefone;
-	protected String cep;
-	protected String numero;
+	protected int telefone;
+	protected int cep;
+	protected int numero;
 	protected String bairro;
 	protected String complemento;
 	protected String cidade;
@@ -13,13 +13,13 @@ public abstract class DadosCadastrais {
 	protected String getNome() {
 		return nome;
 	}	
-	protected String getTelefone() {
+	protected int getTelefone() {
 		return telefone;
 	}	
-	protected String getCep() {
+	protected int getCep() {
 		return cep;
 	}	
-	protected String getNumero() {
+	protected int getNumero() {
 		return numero;
 	}	
 	protected String getBairro() {
@@ -36,9 +36,9 @@ public abstract class DadosCadastrais {
 	}
 	
 	protected abstract void setNome(String nome);
-	protected abstract void setTelefone(String telefone);
-	protected abstract void setCep(String cep);
-	protected abstract void setNumero(String numero);
+	protected abstract void setTelefone(int telefone);
+	protected abstract void setCep(int cep);
+	protected abstract void setNumero(int numero);
 	protected abstract void setBairro(String bairro);
 	protected abstract void setComplemento(String complemento);
 	protected abstract void setCidade(String cidade);

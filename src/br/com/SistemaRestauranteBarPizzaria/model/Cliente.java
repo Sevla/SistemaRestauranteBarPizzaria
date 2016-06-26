@@ -1,24 +1,19 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
-import java.util.Scanner;
-import br.com.SistemaRestauranteBarPizzaria.model.Pedido;
-import br.com.SistemaRestauranteBarPizzaria.model.Administrador;
-
 public class Cliente extends DadosCadastrais{
 	protected double mesa;
 	protected double idFormaPagamento;
 	protected String sugestaoOuReclamacao;
-	private Scanner leitura = new Scanner(System.in);
 	protected void setNome(String nome){
 		this.nome = nome;
 	}
-	protected void setTelefone(String telefone){
+	protected void setTelefone(int telefone){
 		this.telefone = telefone;
 	}
-	protected void setCep(String cep){
+	protected void setCep(int cep){
 		this.cep = cep;
 	}
-	protected void setNumero(String numero){
+	protected void setNumero(int numero){
 		this.numero = numero;
 	}
 	protected void setBairro(String bairro){
@@ -50,20 +45,5 @@ public class Cliente extends DadosCadastrais{
 	}	
 	protected void setSugestaoOuReclamacao(String sugestaoOuReclamacao){
 		this.sugestaoOuReclamacao = sugestaoOuReclamacao;
-	}
-	
-	protected void VisualizarCardapio(){
-		for (int i = 0; i < Administrador.NovoCardapio.size(); i++) {
-			Cardapio imprimirCardapio = (Cardapio) Administrador.NovoCardapio;
-			System.out.print(imprimirCardapio.getIdItemCardapio());
-			System.out.print(" ");
-			System.out.print(imprimirCardapio.getNomeItemCardapio());
-			System.out.print(" ");
-			System.out.println(imprimirCardapio.getValorItemCardapio());
-		}
-	}
-	
-	protected void FazerPedido(){
-			
 	}
 }

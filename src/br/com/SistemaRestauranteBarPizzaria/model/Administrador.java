@@ -14,17 +14,16 @@ public class Administrador extends Funcionario{
 	Administrador administrador = new Administrador();	
 	
 	public void AdicionaFuncionario() throws SQLException{
-		//Listar funcionarios cadastrados
 		Funcionario novoFuncionario = new Funcionario();
 		
 		System.out.println("Digite o nome do Funcionario: ");
 		novoFuncionario.setNome(this.leitura.nextLine());
 		System.out.println("Digite o telefone do Funcionario: ");
-		novoFuncionario.setTelefone(this.leitura.nextLine());
+		novoFuncionario.setTelefone(this.leitura.nextInt());
 		System.out.println("Digite o CEP do Funcionario: ");
-		novoFuncionario.setCep(this.leitura.nextLine());
+		novoFuncionario.setCep(this.leitura.nextInt());
 		System.out.println("Digite o Numero da Residência do Funcionario: ");
-		novoFuncionario.setNumero(this.leitura.nextLine());
+		novoFuncionario.setNumero(this.leitura.nextInt());
 		System.out.println("Digite o Bairro do Funcionario: ");
 		novoFuncionario.setBairro(this.leitura.nextLine());
 		System.out.println("Digite o Complmento do Endereço do Funcionario: ");
@@ -179,9 +178,9 @@ public class Administrador extends Funcionario{
 	             System.out.println(rs.getDouble("ctps")
 	            		 +" "+rs.getString("nome")
 	            		 +" "+rs.getString("dataAdmissao")
-	            		 +" "+rs.getString("telefone")
-	            		 +" "+rs.getString("cep")
-	            		 +" "+rs.getString("numero")
+	            		 +" "+rs.getInt("telefone")
+	            		 +" "+rs.getInt("cep")
+	            		 +" "+rs.getInt("numero")
 	            		 +" "+rs.getString("bairro")
 	            		 +" "+rs.getString("complemento")
 	            		 +" "+rs.getString("cidade")
