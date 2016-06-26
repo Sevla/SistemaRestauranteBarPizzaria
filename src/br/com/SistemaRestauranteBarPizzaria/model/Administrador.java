@@ -138,14 +138,60 @@ public class Administrador extends Funcionario{
 		try{
 			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from cardapio");
 			ResultSet rs = pstm.executeQuery();
-	        System.out.println("  ID    |         NOME         |     VALOR    ");
+	        System.out.println("|    CNPJ    |         NOME         |     ENDERECO     |    ");
 	        while (rs.next()) {
-	             System.out.println(rs.getInt("idItemCardapio")+" "+rs.getString("nomeItemCardapio")+" "+rs.getDouble("valorItemCardapio"));
+	             System.out.println(rs.getInt("cnpjEstabelecimento")
+	            		 +" "+rs.getString("nomeEstabelecimento")
+	            		 +" "+rs.getString("enderecoEstabelecimento")
+	            		 );
 	         }
 	         rs.close();
 	         pstm.close();
 		}catch (SQLException e) {
 			throw new SQLException("Erro ao Visuzalizar Cardapio: "+e.getMessage());
+		}		
+	}
+	public void VisualizarEmpresa() throws SQLException{
+		try{
+			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from empresa");
+			ResultSet rs = pstm.executeQuery();
+	        System.out.println("|    ID    |         NOME         |     VALOR    |");
+	        while (rs.next()) {
+	             System.out.println(rs.getInt("idItemCardapio")
+	            		 +" "+rs.getString("nomeItemCardapio")
+	            		 +" "+rs.getDouble("valorItemCardapio")
+	            		 );
+	         }
+	         rs.close();
+	         pstm.close();
+		}catch (SQLException e) {
+			throw new SQLException("Erro ao Visuzalizar Cardapio: "+e.getMessage());
+		}		
+	}
+	
+	
+	public void VisualizarFuncionario() throws SQLException{
+		try{
+			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from funcionario");
+			ResultSet rs = pstm.executeQuery();
+	        System.out.println("|    CTPS    |         NOME         |     DATA ADMISSAO     |     TELEFONE     |     CEP     |     NUM     |     BAIRRO     |     COMPLEMENTO     |     CIDADE     |     ESTADO     |");
+	        while (rs.next()) {
+	             System.out.println(rs.getDouble("ctps")
+	            		 +" "+rs.getString("nome")
+	            		 +" "+rs.getString("dataAdmissao")
+	            		 +" "+rs.getString("telefone")
+	            		 +" "+rs.getString("cep")
+	            		 +" "+rs.getString("numero")
+	            		 +" "+rs.getString("bairro")
+	            		 +" "+rs.getString("complemento")
+	            		 +" "+rs.getString("cidade")
+	            		 +" "+rs.getString("estado")
+	            		 );
+	         }
+	         rs.close();
+	         pstm.close();
+		}catch (SQLException e) {
+			throw new SQLException("Erro ao Visuzalizar Funcionario: "+e.getMessage());
 		}		
 	}
 	public void AlterarCardapio() throws SQLException{
