@@ -13,6 +13,7 @@ public class Administrador extends Funcionario{
 	Administrador administrador = new Administrador();	
 	
 	public void AdicionaFuncionario() throws SQLException{
+		//Listar funcionarios cadastrados
 		Funcionario novoFuncionario = new Funcionario();
 		
 		System.out.println("Digite o nome do Funcionario: ");
@@ -33,7 +34,7 @@ public class Administrador extends Funcionario{
 		novoFuncionario.setEstado(this.leitura.nextLine());
 		System.out.println("Digite a Data de Adimissão do Funcionario: ");
 		novoFuncionario.setDataAdmissao(this.leitura.nextLine());
-		System.out.println("Digite o numero do CTPS do Funcionario (só numeros!): ");
+		System.out.println("Digite o numero do CTPS do Funcionario (Apenas numeros!): ");
 		novoFuncionario.setCtps(this.leitura.nextDouble());
 		
 		java.sql.Statement stmt;
@@ -45,6 +46,40 @@ public class Administrador extends Funcionario{
 											+novoFuncionario.getBairro()+"','"+novoFuncionario.getComplemento()+"','"
 											+novoFuncionario.getCidade()+"','"+novoFuncionario.getEstado()+"','"
 											+novoFuncionario.getDataAdmissao()+"','"+novoFuncionario.getCtps()+"')");
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
+		}
+	}
+	public void RemoveFuncionario() throws SQLException{
+		//Listar funcionarios cadastrados
+	
+		System.out.println("Digite o numero do CTPS do Funcionario que deseja remover (Apenas numeros!): ");
+		double ctps= leitura.nextDouble();
+		
+		java.sql.Statement stmt;
+		try {
+			stmt = Administrador.conexao.createStatement();
+			stmt.executeUpdate("DELETE FROM funcionario WHERE ctps="+ctps+";");
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
+		}
+	}
+	public void AlteraFuncionario() throws SQLException{
+		//Listar funcionarios cadastrados
+	
+		System.out.println("Digite o numero do CTPS do Funcionario que deseja alterar os dados (Apenas numeros!): ");
+		double IdCtps= leitura.nextDouble();
+		System.out.println("Insira um novo CTPS para o funcionario:");
+		int newCtps = leitura.nextInt();
+		System.out.println("Insira um novo nome para o funcionario:");
+		String newNome = leitura.nextLine();
+		System.out.println("Insira um novo telefone para o funcionario");
+		double newTelefone = leitura.nextDouble();// continua...
+		
+		java.sql.Statement stmt;
+		try {
+			stmt = Administrador.conexao.createStatement();
+			stmt.executeUpdate("UPDATE FROM funcionario WHERE ctps="+ctps+";");
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
 		}
@@ -153,8 +188,8 @@ public class Administrador extends Funcionario{
 				}
 			// chama a funcao ListaCardapio(); para listar e informar o cardapio atual
 			}
-		}
-	}
+		
+
 	public void ListaCardapio() throws SQLException{
 		
 	}
