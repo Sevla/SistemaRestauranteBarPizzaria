@@ -17,8 +17,8 @@ public class Caixa {
 		java.sql.Statement stmt;
 		try {
 			stmt = Administrador.conexao.createStatement();
-			stmt.executeUpdate("INSERT INTO caixa(valorInsere)"
-								+ "VALUES('"+getValorCaixa()+"');");
+			stmt.executeUpdate("INSERT INTO caixa(valorCaixa)"
+								+ "VALUES('"+getValorCaixa()+valorInsere+"');");
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar valor ao Caixa: "+e.getMessage());
 		}
