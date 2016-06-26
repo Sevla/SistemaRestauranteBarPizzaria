@@ -2,6 +2,7 @@ package br.com.SistemaRestauranteBarPizzaria.model;
 
 import java.util.Scanner;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Administrador extends Funcionario{
@@ -132,6 +133,20 @@ public class Administrador extends Funcionario{
 			throw new SQLException("Erro ao excluir Cardapio: "+e.getMessage());
 		}
 		// chama a funcao ListaCardapio(); para listar e informar o cardapio atual
+	}
+	public void VisualizarCardapio() throws SQLException{
+		try{
+			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from cardapio");
+			ResultSet rs = pstm.executeQuery();
+	        System.out.println("  ID    |         NOME         |     VALOR    ");
+	        while (rs.next()) {
+	             System.out.println(rs.getInt("idItemCardapio")+" "+rs.getString("nomeItemCardapio")+" "+rs.getDouble("valorItemCardapio"));
+	         }
+	         rs.close();
+	         pstm.close();
+		}catch (SQLException e) {
+			throw new SQLException("Erro ao Visuzalizar Cardapio: "+e.getMessage());
+		}		
 	}
 	public void AlterarCardapio() throws SQLException{
 		int itemAlteracao;
