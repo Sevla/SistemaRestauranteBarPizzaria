@@ -66,15 +66,9 @@ public class Administrador extends Funcionario{
 	}
 	public void AlteraFuncionario() throws SQLException{
 		//Listar funcionarios cadastrados
-	
-		System.out.println("Digite o numero do CTPS do Funcionario que deseja alterar os dados (Apenas numeros!): ");
-		double IdCtps= leitura.nextDouble();
-		System.out.println("Insira um novo CTPS para o funcionario:");
-		int newCtps = leitura.nextInt();
-		System.out.println("Insira um novo nome para o funcionario:");
-		String newNome = leitura.nextLine();
-		System.out.println("Insira um novo telefone para o funcionario");
-		double newTelefone = leitura.nextDouble();// continua...
+		System.out.println("Insira uma opção de alteração: ");//continua...
+		
+		
 		
 		java.sql.Statement stmt;
 		try {
