@@ -13,12 +13,12 @@ public class Caixa {
 		this.valorCaixa = valorCaixa;
 	}
 	public void InsereCaixa(double valorInsere) throws SQLException{ //recebe parametro do valor do pedido pedido
-		
+		private double valorUpdate = getValorCaixa()+valorInsere;
 		java.sql.Statement stmt;
 		try {
 			stmt = Administrador.conexao.createStatement();
 			stmt.executeUpdate("INSERT INTO caixa(valorCaixa)"
-								+ "VALUES('"+getValorCaixa()+valorInsere+"');");
+								+ "VALUES('"+valorUpdate+"');");
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar valor ao Caixa: "+e.getMessage());
 		}
