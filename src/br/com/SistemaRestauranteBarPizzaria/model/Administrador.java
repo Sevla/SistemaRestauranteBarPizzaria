@@ -6,9 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Administrador extends Funcionario{
-	private static String nomeEstabelecimento;
-	private static String cnpjEstabelecimento;
-	private static String enderecoEstabelecimento;
 	static Connection conexao;
 	private Scanner leitura = new Scanner(System.in);
 	Administrador administrador = new Administrador();	
@@ -78,21 +75,22 @@ public class Administrador extends Funcionario{
 			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
 		}
 	}
-	public void AdicionarDadosEmpresa() throws SQLException{		
-		System.out.println("Digite o nome da Empresa: ");
-		administrador.setnomeEstabelecimento(this.leitura.nextLine());
-		System.out.println("Digite o CNPJ da Empresa: ");
-		administrador.setCnpjEstabelecimento(this.leitura.nextLine());
-		System.out.println("Digite o Endereço da Empresa: ");
-		administrador.setEnderecoEstabelecimento(this.leitura.nextLine());
+	public void AdicionarDadosEmpresa() throws SQLException{
+		Empresa empresa = new Empresa();
 		
 		java.sql.Statement stmt;
 		try {
 			stmt = Administrador.conexao.createStatement();
-			stmt.executeUpdate("INSERT INTO empresa(nomeEstabelecimento,cnpjEstabelecimento,enderecoEstabelecimento)"
-								+ "VALUES('"+administrador.getnomeEstabelecimento()+"','"
-											+administrador.getCnpjEstabelecimento()+"','"
-											+administrador.getEnderecoEstabelecimento()+"')");
+			stmt.executeUpdate("INSERT INTO empresa(cnpj,nome,telefone,cep,numero,bairro,complemento,cidade,estado)"
+								+ "VALUES('"+empresa.getCnpj()+"','"
+											+empresa.getNome()+"','"
+											+empresa.getTelefone()+"','"
+											+empresa.getCep()+"','"
+											+empresa.getNumero()+"','"
+											+empresa.getBairro()+"','"
+											+empresa.getComplemento()+"','"
+											+empresa.getCidade()+"','"
+											+empresa.getEstado()+"')");
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
 		}
@@ -242,33 +240,4 @@ public class Administrador extends Funcionario{
 				}
 			// chama a funcao ListaCardapio(); para listar e informar o cardapio atual
 			}
-		
-
-	public void ListaCardapio() throws SQLException{
-		
-	}
-	public void ListaFuncionario() throws SQLException{
-		
-	}
-	public void ListaEmpresa() throws SQLException{
-		
-	}
-	protected String getnomeEstabelecimento() {
-		return nomeEstabelecimento;
-	}
-	protected String getCnpjEstabelecimento() {
-		return cnpjEstabelecimento;
-	}
-	protected String getEnderecoEstabelecimento() {
-		return enderecoEstabelecimento;
-	}
-	protected void setnomeEstabelecimento(String nomeEstabelecimento) {
-		Administrador.nomeEstabelecimento = nomeEstabelecimento;
-	}
-	protected void setCnpjEstabelecimento(String cnpjEstabelecimento) {
-		Administrador.cnpjEstabelecimento = cnpjEstabelecimento;
-	}
-	protected void setEnderecoEstabelecimento(String enderecoEstabelecimento) {
-		Administrador.enderecoEstabelecimento = enderecoEstabelecimento;
-	}
 }

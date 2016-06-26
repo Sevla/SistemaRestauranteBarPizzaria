@@ -3,8 +3,7 @@ package br.com.SistemaRestauranteBarPizzaria.model;
 import java.sql.SQLException;
 
 public class Caixa {
-	private double valorCaixa;
-	
+	private double valorCaixa;	
 	
 	protected double getValorCaixa() {
 		return valorCaixa;
@@ -19,7 +18,7 @@ public class Caixa {
 		try {
 			stmt = Administrador.conexao.createStatement();
 			stmt.executeUpdate("INSERT INTO caixa(valorInsere)"
-								+ "VALUES('"+Caixa.getValorCaixa()+"');");
+								+ "VALUES('"+getValorCaixa()+"');");
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar valor ao Caixa: "+e.getMessage());
 		}
