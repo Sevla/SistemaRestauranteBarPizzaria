@@ -8,7 +8,6 @@ public class Caixa {
 	protected double getValorCaixa() {
 		return valorCaixa;
 	}
-	
 	protected void setValorCaixa(double valorCaixa) {
 		this.valorCaixa = valorCaixa;
 	}
