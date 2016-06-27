@@ -3,7 +3,7 @@ package br.com.SistemaRestauranteBarPizzaria.model;
 public class Funcionario extends DadosCadastrais{
 	protected String dataAdmissao;
 	protected double ctps;
-	protected String tipoFuncionario;//Adimistrador ou Gerente
+	protected int tipoFuncionario;//Adimistrador ou Gerente
 	
 	protected String getDataAdmissao() {
 		return dataAdmissao;
@@ -11,7 +11,7 @@ public class Funcionario extends DadosCadastrais{
 	protected double getCtps() {
 		return ctps;
 	}
-	protected String getTipoFuncionario(){
+	protected int getTipoFuncionario(){
 		return tipoFuncionario;
 	}
 	protected void setNome(String nome){
