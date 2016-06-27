@@ -110,8 +110,9 @@ public class Pedido {
 			pedido.setTroco(subtotal, pedido.getValorDado());
 			
 			try {
-				stmt.executeUpdate("INSERT INTO pedido(mesa,statusPedido,formaPagamento,valorTotal,valorDado,troco)"
-									+ "VALUES('"+pedido.getMesa()+"','"
+				stmt.executeUpdate("INSERT INTO pedido(idPedido,mesa,statusPedido,formaPagamento,valorTotal,valorDado,troco)"
+									+ "VALUES('"+pedido.getIdPedido()+"','"
+												+pedido.getMesa()+"','"
 												+pedido.getIsPendentePedido()+"','"
 												+pedido.getFormaPagamento()+"','"
 												+pedido.getValorTotal()+"','"
@@ -122,12 +123,24 @@ public class Pedido {
 			}
 		}
 	}
-	public String StatusPedido(){
-		if(pedido.getIsPendentePedido()){
+	public String StringStatusPedido(boolean isPendentePedido){
+		if(isPendentePedido){
 			return "Pendente";
 		}
 		else{
 			return "Entregue";
+		}
+	}
+	public String StringFormaPagamento(int formaPagamento){
+		switch(formaPagamento){
+			case 1:
+				return "A Vista";
+			case 2:
+				return "Cartão";
+			case 3:
+				return "Ticket";
+			default:
+				return null;
 		}
 	}
 	public void AlterarStatusPedido() throws SQLException{
@@ -154,11 +167,12 @@ public class Pedido {
 		try{
 			java.sql.PreparedStatement pstm = Gerente.conexao.prepareStatement("select * from cardapio");
 			ResultSet rs = pstm.executeQuery();
-	        System.out.println("| MESA |  STATUS |  FORMA PAGAMENTO  |  VALOR TOTAL  |  VALOR DADO  |  TROCO  |");
+	        System.out.println("|  ID  |  MESA |  STATUS |  FORMA PAGAMENTO  |  VALOR TOTAL  |  VALOR DADO  |  TROCO  |");
 	        while (rs.next()) {
-	             System.out.println(rs.getInt("mesa")
-	            		 +" "+rs.getBoolean("status")
-	            		 +" "+rs.getInt("formaPagamento")
+	             System.out.println(rs.getBoolean("idPedido")
+	            		 +" "+rs.getInt("mesa")
+	            		 +" "+pedido.StringStatusPedido(rs.getBoolean("status"))
+	            		 +" "+pedido.StringFormaPagamento(rs.getInt("formaPagamento"))
 	            		 +" "+rs.getDouble("valorTotal")
 	            		 +" "+rs.getDouble("valorDado")
 	            		 +" "+rs.getDouble("troco")
