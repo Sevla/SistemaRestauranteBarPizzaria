@@ -3,9 +3,7 @@ package br.com.SistemaRestauranteBarPizzaria.model;
 public class Cliente extends DadosCadastrais{
 	protected int numeroMesa;
 	protected int idFormaPagamento;
-	protected double valorTotal;
 	protected double valorDado;
-	protected double troco;
 	protected String sugestaoOuReclamacao;
 	
 	protected void setNumeroMesa(int numeroMesa){
@@ -14,14 +12,8 @@ public class Cliente extends DadosCadastrais{
 	protected void setIdFormaPagamento(int idFormaPagamento){
 		this.idFormaPagamento = idFormaPagamento;
 	}
-	protected void setValorTotal(double valorTotal){
-		this.valorTotal = valorTotal;
-	}
 	protected void setValorDado(double valorDado) {
 		this.valorDado = valorDado;
-	}
-	protected void setTroco(double troco) {
-		this.troco = troco;
 	}
 	protected void setNome(String nome){
 		this.nome = nome;
@@ -53,14 +45,8 @@ public class Cliente extends DadosCadastrais{
 	protected int getIdFormaPagamento() {
 		return idFormaPagamento;
 	}
-	protected double getValorTotal() {
-		return valorTotal;
-	}
 	protected double getValorDado() {
 		return valorDado;
-	}
-	protected double getTroco() {
-		return troco;
 	}
 	protected String getSugestaoOuReclamacao() {
 		return sugestaoOuReclamacao;
