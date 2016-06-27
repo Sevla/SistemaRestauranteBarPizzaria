@@ -5,19 +5,24 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Pedido {
+	int idPedido;
 	int mesa;
-	int statusPedido;
+	boolean isPendentePedido = true;
 	int formaPagamento;
 	double valorTotal;
 	double valorDado;
 	double troco;
 	public static Scanner leitura = new Scanner(System.in);
+	Pedido pedido = new Pedido();
 	
+	protected int getIdPedido() {
+		return idPedido;
+	}
 	protected int getMesa() {
 		return mesa;
 	}
-	protected int getStatusPedido() {
-		return statusPedido;
+	protected boolean getIsPendentePedido() {
+		return isPendentePedido;
 	}
 	protected int getFormaPagamento() {
 		return formaPagamento;
@@ -31,14 +36,14 @@ public class Pedido {
 	protected double getTroco() {
 		return troco;
 	}
-	protected static Scanner getLeitura() {
-		return leitura;
+	protected void setIdPedido(int idPedido) {
+		this.idPedido = idPedido;
 	}
 	protected void setMesa(int mesa) {
 		this.mesa = mesa;
 	}
-	protected void setStatusPedido(int statusPedido) {
-		this.statusPedido = statusPedido;
+	protected void setPendentePedido(boolean isPendentePedido) {
+		this.isPendentePedido = isPendentePedido;
 	}
 	protected void setFormaPagamento(int formaPagamento) {
 		this.formaPagamento = formaPagamento;
@@ -52,31 +57,7 @@ public class Pedido {
 	protected void setTroco(double valorTotal, double valorDado) {
 		this.troco = valorDado - valorTotal;
 	}
-	protected static void setLeitura(Scanner leitura) {
-		Pedido.leitura = leitura;
-	}
-	public void FormaPagamento() throws SQLException {
-		Pedido pedido = new Pedido();
-		System.out.println("Digite a forma de Pagamento: "
-				+ "[1]: A Vista;"
-				+ "[2]: Cartão Crédito/Débito;"
-				+ "[3]: Ticket Alimentação;");
-		pedido.setFormaPagamento(leitura.nextInt());
-		switch(pedido.getFormaPagamento()){
-			case 1:
-				AdicionarPedidoAVista();
-				break;
-			case 2:
-				AdicionarPedido();
-				break;
-			case 3:
-				AdicionarPedido();
-				break;
-			default:
-				System.out.println("Opção Inválida!");
-		}
-	}
-	public void AdicionarPedidoAVista() throws SQLException{
+	public static void AdicionarPedido() throws SQLException{
 		Cardapio cardapio = new Cardapio();
 		Pedido pedido = new Pedido();
 		
@@ -110,64 +91,83 @@ public class Pedido {
 		
 		pedido.setValorTotal(subtotal);
 		
-		System.out.println("Digite o valor dado em espécie pelo Cliente: ");
-		pedido.setValorDado(leitura.nextDouble());
-		pedido.setTroco(subtotal, pedido.getValorDado());
-		
-		try {
-			stmt.executeUpdate("INSERT INTO pedido(mesa,formaPagamento,valorTotal,valorDado,troco)"
-								+ "VALUES('"+pedido.getMesa()+"','"
-											+pedido.getFormaPagamento()+"','"
-											+pedido.getValorTotal()+"','"
-											+pedido.getValorDado()+"','"
-											+pedido.getTroco()+"');");
-		} catch (SQLException e) {
-			throw new SQLException("Erro ao Adicionar Pedido: "+e.getMessage());
+		if(pedido.getFormaPagamento() != 1){
+			try {
+				stmt.executeUpdate("INSERT INTO pedido(idPedido,mesa,statusPedido,formaPagamento,valorTotal,valorDado,troco)"
+									+ "VALUES('"+pedido.getIdPedido()+"','"
+												+pedido.getMesa()+"','"
+												+pedido.getFormaPagamento()+"','"
+												+pedido.getValorTotal()+"','"
+												+null+"','"
+												+null+"');");
+			} catch (SQLException e) {
+				throw new SQLException("Erro ao Adicionar Pedido Credito/Ticket: "+e.getMessage());
+			}
+		}
+		else{
+			System.out.println("Digite o valor dado em espécie pelo Cliente: ");
+			pedido.setValorDado(leitura.nextDouble());
+			pedido.setTroco(subtotal, pedido.getValorDado());
+			
+			try {
+				stmt.executeUpdate("INSERT INTO pedido(mesa,statusPedido,formaPagamento,valorTotal,valorDado,troco)"
+									+ "VALUES('"+pedido.getMesa()+"','"
+												+pedido.getIsPendentePedido()+"','"
+												+pedido.getFormaPagamento()+"','"
+												+pedido.getValorTotal()+"','"
+												+pedido.getValorDado()+"','"
+												+pedido.getTroco()+"');");
+			} catch (SQLException e) {
+				throw new SQLException("Erro ao Adicionar Pedido A Vista: "+e.getMessage());
+			}
 		}
 	}
-	public void AdicionarPedido() throws SQLException{
-		Cardapio cardapio = new Cardapio();
-		Pedido pedido = new Pedido();
-		
-		int incremento = 1;
-		double subtotal = 0;
-		double quantidadeItensProduto = 0;
-		System.out.println("Digite o Numero da Mesa do Cliente: ");
-		pedido.setMesa(leitura.nextInt());
-		
-		System.out.println("Digite a quantidade de Itens Distintos do Pedido: ");
-		int quantidadeItensDistintos = leitura.nextInt();
-		java.sql.Statement stmt = Administrador.conexao.createStatement();
-		do{
-			System.out.println("Digite o ID do "+incremento+"o Item a Inserir no Pedido: ");
-			cardapio.setIdItemCardapio(leitura.nextInt());
-			System.out.println("Digite a Quantidade de Itens desse Produto: ");
-			quantidadeItensProduto = leitura.nextDouble();
-			try {
-				java.sql.PreparedStatement pstm = Gerente.conexao.prepareStatement("select valorItemCardapio FROM cardapio WHERE id='"+cardapio.getIdItemCardapio()+"'");
-				ResultSet rs = pstm.executeQuery();
-				rs.next();
-				subtotal += rs.getDouble("valorItemCardapio") * quantidadeItensProduto;
-				rs.close();
-		        pstm.close();
-			}catch (SQLException e) {
-				throw new SQLException("Erro ao Pegar Valor do Item do Cardápio: "+e.getMessage());
-			}
-			incremento++;
-			quantidadeItensDistintos--;
-		}while(quantidadeItensDistintos > 0);
-		
-		pedido.setValorTotal(subtotal);
-		
-		try {
-			stmt.executeUpdate("INSERT INTO pedido(mesa,formaPagamento,valorTotal,valorDado,troco)"
-								+ "VALUES('"+pedido.getMesa()+"','"
-											+pedido.getFormaPagamento()+"','"
-											+pedido.getValorTotal()+"','"
-											+null+"','"
-											+null+"');");
-		} catch (SQLException e) {
-			throw new SQLException("Erro ao Adicionar Pedido: "+e.getMessage());
+	public String StatusPedido(){
+		if(pedido.getIsPendentePedido()){
+			return "Pendente";
 		}
+		else{
+			return "Entregue";
+		}
+	}
+	public void AlterarStatusPedido() throws SQLException{
+		System.out.println("Digite o ID do Pedido ao qual deseja alterar o Status: ");
+		pedido.setIdPedido(leitura.nextInt());
+		try {
+			java.sql.Statement stmt = Gerente.conexao.createStatement();
+			java.sql.PreparedStatement pstm = Gerente.conexao.prepareStatement("select status FROM pedido WHERE id='"+pedido.getIdPedido()+"'");
+			ResultSet rs = pstm.executeQuery();
+			rs.next();
+			if(pedido.getIsPendentePedido() == true){
+				stmt.executeUpdate("UPDATE pedido SET isPendentePedido='"+false+"' WHERE id='"+pedido.getIdPedido()+"'");
+			}
+			else{
+				stmt.executeUpdate("UPDATE pedido SET isPendentePedido='"+true+"' WHERE id='"+pedido.getIdPedido()+"'");
+			}
+			rs.close();
+	        pstm.close();
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao Alterar Status do Pedido: "+e.getMessage());
+		}
+	}
+	public void VisualizarPedidos() throws SQLException{
+		try{
+			java.sql.PreparedStatement pstm = Gerente.conexao.prepareStatement("select * from cardapio");
+			ResultSet rs = pstm.executeQuery();
+	        System.out.println("| MESA |  STATUS |  FORMA PAGAMENTO  |  VALOR TOTAL  |  VALOR DADO  |  TROCO  |");
+	        while (rs.next()) {
+	             System.out.println(rs.getInt("mesa")
+	            		 +" "+rs.getBoolean("status")
+	            		 +" "+rs.getInt("formaPagamento")
+	            		 +" "+rs.getDouble("valorTotal")
+	            		 +" "+rs.getDouble("valorDado")
+	            		 +" "+rs.getDouble("troco")
+	            		 );
+	         }
+	         rs.close();
+	         pstm.close();
+		}catch (SQLException e) {
+			throw new SQLException("Erro ao Visualizar dados da Empresa: "+e.getMessage());
+		}		
 	}
 }

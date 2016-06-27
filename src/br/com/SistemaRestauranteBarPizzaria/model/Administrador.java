@@ -221,7 +221,7 @@ public class Administrador extends Funcionario{
 	}
 	public void VisualizarFuncionarios() throws SQLException{
 		try{
-			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from funcionario");
+			java.sql.PreparedStatement pstm = Administrador.conexao.prepareStatement("select * from funcionario");
 			ResultSet rs = pstm.executeQuery();
 	        System.out.println("|    CTPS    |         NOME         |     DATA ADMISSAO     |     TELEFONE     |     CEP     |     NUM     |     BAIRRO     |     COMPLEMENTO     |     CIDADE     |     ESTADO     |");
 	        while (rs.next()) {
@@ -407,9 +407,9 @@ public class Administrador extends Funcionario{
 			throw new SQLException("Erro ao Remover Item do Cardapio: "+e.getMessage());
 		}
 	}	
-	public void VisualizarItensCardapio() throws SQLException{
+	public static void VisualizarItensCardapio() throws SQLException{
 		try{
-			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from empresa");
+			java.sql.PreparedStatement pstm = Administrador.conexao.prepareStatement("select * from empresa");
 			ResultSet rs = pstm.executeQuery();
 	        System.out.println("|    ID    |         NOME         |     VALOR    |");
 	        while (rs.next()) {
@@ -461,7 +461,7 @@ public class Administrador extends Funcionario{
 			
 			if(opcaoInvalida){
 				try {
-					java.sql.Statement stmt = Administrador.conexao.createStatement();
+					java.sql.Statement stmt = conexao.createStatement();
 					java.sql.PreparedStatement pstm = conexao.prepareStatement("select "+escolha+" FROM cardapio WHERE id='"+idProduto+"'");
 					ResultSet rs = pstm.executeQuery();
 					rs.next();
