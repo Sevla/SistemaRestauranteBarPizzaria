@@ -13,7 +13,7 @@ public class Pedido {
 	double valorDado;
 	double troco;
 	public static Scanner leitura = new Scanner(System.in);
-	Pedido pedido = new Pedido();
+	static Pedido pedido = new Pedido();
 	
 	protected int getIdPedido() {
 		return idPedido;
@@ -143,7 +143,7 @@ public class Pedido {
 				return null;
 		}
 	}
-	public void AlterarStatusPedido() throws SQLException{
+	public static void AlterarStatusPedido() throws SQLException{
 		System.out.println("Digite o ID do Pedido ao qual deseja alterar o Status: ");
 		pedido.setIdPedido(leitura.nextInt());
 		try {
@@ -163,7 +163,7 @@ public class Pedido {
 			throw new SQLException("Erro ao Alterar Status do Pedido: "+e.getMessage());
 		}
 	}
-	public void VisualizarPedidos() throws SQLException{
+	public static void VisualizarPedidos() throws SQLException{
 		try{
 			java.sql.PreparedStatement pstm = Gerente.conexao.prepareStatement("select * from cardapio");
 			ResultSet rs = pstm.executeQuery();

@@ -1,7 +1,6 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -17,23 +16,23 @@ public class Gerente extends Funcionario{
 		do{
 			System.out.println("Seja Bem-vindo Gerente "+getNome()+"!");
 			System.out.println("Insira uma opção Administrativa abaixo:"
-					+ "[1]: Remover Pedido;"
+					+ "[1]: Alterar Status do Pedido;"
 					+ "[2]: Visualizar Pedidos;"
 					+ "[3]: Sair;");
 			opcao = leitura.nextInt();
 			switch(opcao){
 				case 1:
-					RemoverPedido();
+					Pedido.AlterarStatusPedido();
 					break;
 				case 2:
-					VisualizarPedidos();
+					Pedido.VisualizarPedidos();
 					break;
 				case 3:
-					break;
+					System.out.println("Desconectando Gerente...");
 				default:
 					System.out.println("Opção Inválida!");
 			}
-		}while(opcao != 4);
+		}while(opcao != 3);
 		
 		Login.TelaDeLogin();
 	}	
