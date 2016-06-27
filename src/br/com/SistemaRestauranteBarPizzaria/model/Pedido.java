@@ -119,6 +119,7 @@ public class Pedido {
 								+ "VALUES('"+pedido.getMesa()+"','"
 											+pedido.getFormaPagamento()+"','"
 											+pedido.getValorTotal()+"','"
+											+pedido.getValorDado()+"','"
 											+pedido.getTroco()+"');");
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar Pedido: "+e.getMessage());
@@ -163,6 +164,7 @@ public class Pedido {
 								+ "VALUES('"+pedido.getMesa()+"','"
 											+pedido.getFormaPagamento()+"','"
 											+pedido.getValorTotal()+"','"
+											+null+"','"
 											+null+"');");
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar Pedido: "+e.getMessage());
