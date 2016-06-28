@@ -161,17 +161,17 @@ public class AdministradorBO {
 			ResultSet rs = pstm.executeQuery();
 	        System.out.println("|         NOME         |     DATA ADMISSAO     |     TELEFONE     |     CEP     |     NUM     |     BAIRRO     |     COMPLEMENTO     |     CIDADE     |     ESTADO     |    CTPS   |");
 	        while (rs.next()) {
-	             System.out.println(rs.getString("nome")
-	            		 +" "+rs.getString("telefone")
-	            		 +" "+rs.getString("cep")
-	            		 +" "+rs.getInt("numero")
-	            		 +" "+rs.getString("bairro")
-	            		 +" "+rs.getString("complemento")
-	            		 +" "+rs.getString("cidade")
-	            		 +" "+rs.getString("estado")
-	            		 +" "+rs.getString("dataAdmissao")
-	            		 +" "+rs.getString("ctps")
-	            		 );
+	             System.out.println(rs.getString("nome"));
+	             System.out.println(rs.getString("telefone"));
+	             System.out.println(rs.getString("cep"));
+	             System.out.println(rs.getInt("numero"));
+	             System.out.println(rs.getString("bairro"));
+	             System.out.println(rs.getString("complemento"));
+	             System.out.println(rs.getString("cidade"));
+	             System.out.println(rs.getString("estado"));
+	             System.out.println(rs.getString("dataAdmissao"));
+	             System.out.println(rs.getString("ctps"));
+	            		 
 	         }
 	         rs.close();
 	         pstm.close();
@@ -209,10 +209,9 @@ public class AdministradorBO {
 			ResultSet rs = pstm.executeQuery();
 	        System.out.println("|    CNPJ    |         NOME         |     ENDERECO     |    ");
 	        while (rs.next()) {
-	             System.out.println(rs.getInt("cnpjEstabelecimento")
-	            		 +" "+rs.getString("nomeEstabelecimento")
-	            		 +" "+rs.getString("enderecoEstabelecimento")
-	            		 );
+	             System.out.println(rs.getInt("cnpjEstabelecimento"));
+	             System.out.println( rs.getString("nomeEstabelecimento"));
+	             System.out.println( rs.getString("enderecoEstabelecimento"));
 	         }
 	         rs.close();
 	         pstm.close();
@@ -350,10 +349,10 @@ public class AdministradorBO {
 			ResultSet rs = pstm.executeQuery();
 	        System.out.println("|    ID    |         NOME         |     VALOR    |");
 	        while (rs.next()) {
-	             System.out.println(rs.getInt("idItemCardapio")
-	            		 +" "+rs.getString("nomeItemCardapio")
-	            		 +" "+rs.getDouble("valorItemCardapio")
-	            		 );
+	             System.out.println(rs.getInt("idItemCardapio"));
+	             System.out.println(rs.getString("nomeItemCardapio"));
+	             System.out.println(rs.getDouble("valorItemCardapio"));
+	            		 
 	         }
 	         rs.close();
 	         pstm.close();
