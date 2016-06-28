@@ -122,14 +122,14 @@ public class PedidoBO {
 			ResultSet rs = pstm.executeQuery();
 	        System.out.println("|  ID  |  MESA |  STATUS |  FORMA PAGAMENTO  |  VALOR TOTAL  |  VALOR DADO  |  TROCO  |");
 	        while (rs.next()) {
-	             System.out.println(rs.getBoolean("idPedido")
-	            		 +" "+rs.getInt("mesa")
-	            		 +" "+StringStatusPedido(rs.getBoolean("status"))
-	            		 +" "+StringFormaPagamento(rs.getInt("formaPagamento"))
-	            		 +" "+rs.getDouble("valorTotal")
-	            		 +" "+rs.getDouble("valorDado")
-	            		 +" "+rs.getDouble("troco")
-	            		 );
+	            System.out.println(rs.getBoolean("idPedido"));
+	            System.out.println(rs.getInt("mesa"));
+	            System.out.println(rs.getBoolean("status"));
+	            System.out.println(rs.getInt("formaPagamento"));
+	            System.out.println(rs.getDouble("valorTotal"));
+	            System.out.println(rs.getDouble("valorDado"));
+	            System.out.println(rs.getBoolean("troco"));
+	            		 
 	         }
 	         rs.close();
 	         pstm.close();
