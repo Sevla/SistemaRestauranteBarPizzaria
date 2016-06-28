@@ -8,10 +8,10 @@ import java.util.Scanner;
 import br.com.SistemaRestauranteBarPizzaria.model.Cardapio;
 import br.com.SistemaRestauranteBarPizzaria.model.Empresa;
 import br.com.SistemaRestauranteBarPizzaria.model.Funcionario;
-import br.com.SistemaRestauranteBarPizzaria.view.Administrador;
+import br.com.SistemaRestauranteBarPizzaria.view.AdministradorView;
 
 public class AdministradorBO {
-	Administrador administrador = new Administrador();
+	AdministradorView administrador = new AdministradorView();
 	static Connection conexao;
 	static Scanner leitura = new Scanner(System.in);
 	

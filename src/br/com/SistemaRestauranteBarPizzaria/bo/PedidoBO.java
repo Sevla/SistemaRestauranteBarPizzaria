@@ -1,14 +1,16 @@
 package br.com.SistemaRestauranteBarPizzaria.bo;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import br.com.SistemaRestauranteBarPizzaria.dao.ConexaoMySQL;
 import br.com.SistemaRestauranteBarPizzaria.model.Cardapio;
 import br.com.SistemaRestauranteBarPizzaria.model.Pedido;
-import br.com.SistemaRestauranteBarPizzaria.view.Gerente;
 
 public class PedidoBO {
+	static Connection conexao;
 	public static Scanner leitura = new Scanner(System.in);
 	static Cardapio cardapio = new Cardapio();
 	static Pedido pedido = new Pedido();
@@ -22,14 +24,14 @@ public class PedidoBO {
 		
 		System.out.println("Digite a quantidade de Itens Distintos do Pedido: ");
 		int quantidadeItensDistintos = leitura.nextInt();
-		java.sql.Statement stmt = AdministradorBO.conexao.createStatement();
+		java.sql.Statement stmt = ConexaoMySQL.conexao.createStatement();
 		do{
 			System.out.println("Digite o ID do "+incremento+"o Item a Inserir no Pedido: ");
 			cardapio.setIdItemCardapio(leitura.nextInt());
 			System.out.println("Digite a Quantidade de Itens desse Produto: ");
 			quantidadeItensProduto = leitura.nextDouble();
 			try {
-				java.sql.PreparedStatement pstm = Gerente.conexao.prepareStatement("select valorItemCardapio FROM cardapio WHERE id='"+cardapio.getIdItemCardapio()+"'");
+				java.sql.PreparedStatement pstm = conexao.prepareStatement("select valorItemCardapio FROM cardapio WHERE id='"+cardapio.getIdItemCardapio()+"'");
 				ResultSet rs = pstm.executeQuery();
 				rs.next();
 				subtotal += rs.getDouble("valorItemCardapio") * quantidadeItensProduto;
@@ -100,8 +102,8 @@ public class PedidoBO {
 		System.out.println("Digite o ID do Pedido ao qual deseja alterar o Status: ");
 		pedido.setIdPedido(leitura.nextInt());
 		try {
-			java.sql.Statement stmt = Gerente.conexao.createStatement();
-			java.sql.PreparedStatement pstm = Gerente.conexao.prepareStatement("select status FROM pedido WHERE id='"+pedido.getIdPedido()+"'");
+			java.sql.Statement stmt = conexao.createStatement();
+			java.sql.PreparedStatement pstm = conexao.prepareStatement("select status FROM pedido WHERE id='"+pedido.getIdPedido()+"'");
 			ResultSet rs = pstm.executeQuery();
 			rs.next();
 			if(pedido.getIsPendentePedido() == true){
@@ -118,7 +120,7 @@ public class PedidoBO {
 	}
 	public static void VisualizarPedidos() throws SQLException{
 		try{
-			java.sql.PreparedStatement pstm = Gerente.conexao.prepareStatement("select * from cardapio");
+			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from cardapio");
 			ResultSet rs = pstm.executeQuery();
 	        System.out.println("|  ID  |  MESA |  STATUS |  FORMA PAGAMENTO  |  VALOR TOTAL  |  VALOR DADO  |  TROCO  |");
 	        while (rs.next()) {

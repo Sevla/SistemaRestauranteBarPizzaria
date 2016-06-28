@@ -7,13 +7,13 @@ import java.util.Scanner;
 import br.com.SistemaRestauranteBarPizzaria.bo.PedidoBO;
 import br.com.SistemaRestauranteBarPizzaria.dao.Login;
 
-public class Gerente {
+public class GerenteView {
 	public static Connection conexao;
-	Gerente gerente = new Gerente();
+	GerenteView gerente = new GerenteView();
 	public static Scanner leitura = new Scanner(System.in);
 	
 	public static void OpcoesGerente(Connection conexao) throws SQLException{
-		Gerente.conexao = conexao;
+		GerenteView.conexao = conexao;
 		int opcao;
 		do{
 			System.out.println("Seja Bem-vindo Gerente!");

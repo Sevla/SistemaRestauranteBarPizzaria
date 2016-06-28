@@ -8,12 +8,12 @@ import br.com.SistemaRestauranteBarPizzaria.bo.AdministradorBO;
 import br.com.SistemaRestauranteBarPizzaria.dao.Login;
 import br.com.SistemaRestauranteBarPizzaria.model.Funcionario;
 
-public class Administrador extends Funcionario{
+public class AdministradorView extends Funcionario{
 	static Connection conexao;
 	static Scanner leitura = new Scanner(System.in);
 	
 	public static void OpcoesAdministrador(Connection conexao) throws SQLException{
-		Administrador.conexao = conexao;
+		AdministradorView.conexao = conexao;
 		int opcao;
 		do{
 			System.out.println("Seja Bem-vindo Administrador !");

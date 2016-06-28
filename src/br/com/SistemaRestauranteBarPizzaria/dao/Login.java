@@ -1,8 +1,8 @@
 package br.com.SistemaRestauranteBarPizzaria.dao;
 
 import br.com.SistemaRestauranteBarPizzaria.bo.PedidoBO;
-import br.com.SistemaRestauranteBarPizzaria.view.Administrador;
-import br.com.SistemaRestauranteBarPizzaria.view.Gerente;
+import br.com.SistemaRestauranteBarPizzaria.view.AdministradorView;
+import br.com.SistemaRestauranteBarPizzaria.view.GerenteView;
 import br.com.SistemaRestauranteBarPizzaria.dao.ConexaoMySQL;
 
 import java.sql.Connection;
@@ -34,10 +34,10 @@ public class Login {
 			}
 			else{
 				if(IsAdministrador()){
-					Administrador.OpcoesAdministrador(conexao);
+					AdministradorView.OpcoesAdministrador(conexao);
 				}
 				else{
-					Gerente.OpcoesGerente(conexao);
+					GerenteView.OpcoesGerente(conexao);
 				}
 			}
 			tentativas++;
@@ -109,11 +109,11 @@ public class Login {
 		do{
 			
 		System.out.println("    #---- Sistema Restaurante ----#       ");
-		System.out.println("Insira uma opção:");
-		System.out.println("[1] Cliente: Fazer pedido;"
-						 + "[2] Cliente: Visualizar pedido;"
-						 + "[3] Funcionário: Login;"
-						 + "[4] Funcionário: Desconectar;");
+		System.out.println("[1] Cliente: Fazer pedido;\n"
+						 + "[2] Cliente: Visualizar pedido;\n"
+						 + "[3] Funcionário: Login;\n"
+						 + "[4] Funcionário: Desconectar;\n");
+		System.out.println("Insira uma opção: ");
 		opcao = leitura.nextInt();
 		switch(opcao){
 		case 1: PedidoBO.AdicionarPedido();

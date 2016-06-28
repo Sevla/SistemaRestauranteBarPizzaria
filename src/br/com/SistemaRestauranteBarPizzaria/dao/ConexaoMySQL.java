@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexaoMySQL implements IConexao {
-	static Connection conexao;
+	public static Connection conexao;
 	
 	@Override
 	public synchronized Connection getConexao(String baseDados, String enderecoBanco, String nomeBanco, String usuario,
