@@ -1,4 +1,4 @@
-package br.com.SistemaRestauranteBarPizzaria.model;
+package br.com.SistemaRestauranteBarPizzaria.view;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -7,8 +7,9 @@ import java.util.Scanner;
 import br.com.SistemaRestauranteBarPizzaria.bo.PedidoBO;
 import br.com.SistemaRestauranteBarPizzaria.dao.Login;
 
-public class Gerente extends Funcionario{
+public class Gerente {
 	public static Connection conexao;
+	Gerente gerente = new Gerente();
 	public static Scanner leitura = new Scanner(System.in);
 	
 	public static void OpcoesGerente(Connection conexao) throws SQLException{
@@ -35,6 +36,6 @@ public class Gerente extends Funcionario{
 			}
 		}while(opcao != 3);
 		
-		Login.TelaDeLogin();
-	}	
+		Login.menu();
+	}
 }

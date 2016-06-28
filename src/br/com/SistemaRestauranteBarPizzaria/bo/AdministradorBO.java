@@ -5,10 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import br.com.SistemaRestauranteBarPizzaria.model.Administrador;
 import br.com.SistemaRestauranteBarPizzaria.model.Cardapio;
 import br.com.SistemaRestauranteBarPizzaria.model.Empresa;
 import br.com.SistemaRestauranteBarPizzaria.model.Funcionario;
+import br.com.SistemaRestauranteBarPizzaria.view.Administrador;
 
 public class AdministradorBO {
 	Administrador administrador = new Administrador();
@@ -185,8 +185,6 @@ public class AdministradorBO {
 	public static void AdicionarDadosEmpresa() throws SQLException{
 		Empresa empresa = new Empresa();
 		
-		
-		
 		try {
 			java.sql.Statement stmt = AdministradorBO.conexao.createStatement();
 			stmt.executeUpdate("INSERT INTO empresa(cnpj,nome,telefone,cep,numero,bairro,complemento,cidade,estado)"
@@ -205,7 +203,7 @@ public class AdministradorBO {
 	}
 	public static void VisualizarEmpresa() throws SQLException{
 		try{
-			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from cardapio");
+			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from empresa");
 			ResultSet rs = pstm.executeQuery();
 	        System.out.println("|    CNPJ    |         NOME         |     ENDERECO     |    ");
 	        while (rs.next()) {

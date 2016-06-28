@@ -1,4 +1,4 @@
-package br.com.SistemaRestauranteBarPizzaria.model;
+package br.com.SistemaRestauranteBarPizzaria.view;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import br.com.SistemaRestauranteBarPizzaria.bo.AdministradorBO;
 import br.com.SistemaRestauranteBarPizzaria.dao.Login;
+import br.com.SistemaRestauranteBarPizzaria.model.Funcionario;
 
 public class Administrador extends Funcionario{
 	static Connection conexao;
@@ -65,12 +66,13 @@ public class Administrador extends Funcionario{
 					AdministradorBO.VisualizarItensCardapio();
 					break;
 				case 12:
+					System.out.println("Desconectando Administrador...");
 					break;
 				default:
 					System.out.println("Opção Inválida!");
 			}
 		}while(opcao != 12);
 		
-		Login.TelaDeLogin();
+		Login.menu();
 	}
 }

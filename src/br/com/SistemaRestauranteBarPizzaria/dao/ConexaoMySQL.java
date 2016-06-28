@@ -20,7 +20,7 @@ public class ConexaoMySQL implements IConexao {
 		return conexao;
 	}
 	
-	public void fecharConexao() {
+	public static void fecharConexao() {
 		try {
 			ConexaoMySQL.conexao.close();
 		} catch (SQLException e) {

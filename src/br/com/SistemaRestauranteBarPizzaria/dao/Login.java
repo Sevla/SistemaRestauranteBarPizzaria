@@ -1,8 +1,9 @@
 package br.com.SistemaRestauranteBarPizzaria.dao;
 
 import br.com.SistemaRestauranteBarPizzaria.bo.PedidoBO;
-import br.com.SistemaRestauranteBarPizzaria.model.Administrador;
-import br.com.SistemaRestauranteBarPizzaria.model.Gerente;
+import br.com.SistemaRestauranteBarPizzaria.view.Administrador;
+import br.com.SistemaRestauranteBarPizzaria.view.Gerente;
+import br.com.SistemaRestauranteBarPizzaria.dao.ConexaoMySQL;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -103,29 +104,38 @@ public class Login {
 		}
 	}
 	
-	public static void main(String[] args) throws SQLException {
-		ConexaoMySQL conectar = new ConexaoMySQL();
-		conectar.getConexao("jdbc:mysql", "localhost", "sistema", "root", "");
-		conexao = ConexaoMySQL.conexao;
-		
-		//TelaDeLogin();
-		
+	public static void menu() throws SQLException{
 		int opcao= 0;
 		do{
 			
 		System.out.println("    #---- Sistema Restaurante ----#       ");
 		System.out.println("Insira uma opção:");
 		System.out.println("[1] Cliente: Fazer pedido;"
-						 + "[2] Funcionário: Login ");
+						 + "[2] Cliente: Visualizar pedido;"
+						 + "[3] Funcionário: Login;"
+						 + "[4] Funcionário: Desconectar;");
 		opcao = leitura.nextInt();
 		switch(opcao){
 		case 1: PedidoBO.AdicionarPedido();
-					break;
-		case 2: TelaDeLogin();
-					break;
+				break;
+		case 2: PedidoBO.VisualizarPedidos();
+				break;
+		case 3: TelaDeLogin();
+				break;
+		case 4: ConexaoMySQL.fecharConexao();
+				break;
 		default: System.out.println("Opção Invalida!");
 					break;
 				}
 			}while(opcao!=3);
 		}
+	
+	public static void main(String[] args) throws SQLException {
+		ConexaoMySQL conectar = new ConexaoMySQL();
+		conectar.getConexao("jdbc:mysql", "localhost", "sistema", "root", "");
+		conexao = ConexaoMySQL.conexao;
+		
+		//TelaDeLogin();
+		menu();
+	}
 }

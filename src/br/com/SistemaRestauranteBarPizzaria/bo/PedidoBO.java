@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import br.com.SistemaRestauranteBarPizzaria.model.Cardapio;
-import br.com.SistemaRestauranteBarPizzaria.model.Gerente;
 import br.com.SistemaRestauranteBarPizzaria.model.Pedido;
+import br.com.SistemaRestauranteBarPizzaria.view.Gerente;
 
 public class PedidoBO {
 	public static Scanner leitura = new Scanner(System.in);
