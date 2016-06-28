@@ -1,15 +1,19 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
 public class Cliente extends DadosCadastrais{
+	public int idPedido;
 	public String sugestaoOuReclamacao;
 	
+	public void setIdPedido(String nome){
+		this.nome = nome;
+	}
 	public void setNome(String nome){
 		this.nome = nome;
 	}
-	public void setTelefone(int telefone){
+	public void setTelefone(String telefone){
 		this.telefone = telefone;
 	}
-	public void setCep(int cep){
+	public void setCep(String cep){
 		this.cep = cep;
 	}
 	public void setNumero(int numero){

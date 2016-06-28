@@ -1,18 +1,18 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
 public class Empresa extends DadosCadastrais{
-	public int cnpj;
+	public String cnpj;
 	
-	public int getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 	public String getNome() {
 		return nome;
 	}	
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}	
-	public int getCep() {
+	public String getCep() {
 		return cep;
 	}	
 	public int getNumero() {
@@ -30,16 +30,16 @@ public class Empresa extends DadosCadastrais{
 	public String getEstado() {
 		return estado;
 	}
-	public void setCnpj(int cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 	public void setNome(String nome){
 		this.nome = nome;
 	}
-	public void setTelefone(int telefone){
+	public void setTelefone(String telefone){
 		this.telefone = telefone;
 	}
-	public void setCep(int cep){
+	public void setCep(String cep){
 		this.cep = cep;
 	}
 	public void setNumero(int numero){

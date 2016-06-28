@@ -11,11 +11,11 @@ public class Gerente extends Funcionario{
 	public static Connection conexao;
 	public static Scanner leitura = new Scanner(System.in);
 	
-	public void OpcoesGerente(Connection conexao) throws SQLException{
+	public static void OpcoesGerente(Connection conexao) throws SQLException{
 		Gerente.conexao = conexao;
 		int opcao;
 		do{
-			System.out.println("Seja Bem-vindo Gerente "+getNome()+"!");
+			System.out.println("Seja Bem-vindo Gerente!");
 			System.out.println("Insira uma opção Administrativa abaixo:"
 					+ "[1]: Alterar Status do Pedido;"
 					+ "[2]: Visualizar Pedidos;"

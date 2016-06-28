@@ -21,9 +21,9 @@ public class AdministradorBO {
 		System.out.println("Digite o nome do Funcionario: ");
 		novoFuncionario.setNome(leitura.nextLine());
 		System.out.println("Digite o telefone do Funcionario: ");
-		novoFuncionario.setTelefone(leitura.nextInt());
+		novoFuncionario.setTelefone(leitura.nextLine());
 		System.out.println("Digite o CEP do Funcionario: ");
-		novoFuncionario.setCep(leitura.nextInt());
+		novoFuncionario.setCep(leitura.nextLine());
 		System.out.println("Digite o Numero da Residência do Funcionario: ");
 		novoFuncionario.setNumero(leitura.nextInt());
 		System.out.println("Digite o Bairro do Funcionario: ");
@@ -37,7 +37,7 @@ public class AdministradorBO {
 		System.out.println("Digite a Data de Adimissão do Funcionario: ");
 		novoFuncionario.setDataAdmissao(leitura.nextLine());
 		System.out.println("Digite o numero do CTPS do Funcionario (Apenas numeros!): ");
-		novoFuncionario.setCtps(leitura.nextDouble());
+		novoFuncionario.setCtps(leitura.nextLine());
 		
 		java.sql.Statement stmt;
 		try {
@@ -159,18 +159,18 @@ public class AdministradorBO {
 		try{
 			java.sql.PreparedStatement pstm = AdministradorBO.conexao.prepareStatement("select * from funcionario");
 			ResultSet rs = pstm.executeQuery();
-	        System.out.println("|    CTPS    |         NOME         |     DATA ADMISSAO     |     TELEFONE     |     CEP     |     NUM     |     BAIRRO     |     COMPLEMENTO     |     CIDADE     |     ESTADO     |");
+	        System.out.println("|         NOME         |     DATA ADMISSAO     |     TELEFONE     |     CEP     |     NUM     |     BAIRRO     |     COMPLEMENTO     |     CIDADE     |     ESTADO     |    CTPS   |");
 	        while (rs.next()) {
-	             System.out.println(rs.getDouble("ctps")
-	            		 +" "+rs.getString("nome")
-	            		 +" "+rs.getString("dataAdmissao")
-	            		 +" "+rs.getInt("telefone")
-	            		 +" "+rs.getInt("cep")
+	             System.out.println(rs.getString("nome")
+	            		 +" "+rs.getString("telefone")
+	            		 +" "+rs.getString("cep")
 	            		 +" "+rs.getInt("numero")
 	            		 +" "+rs.getString("bairro")
 	            		 +" "+rs.getString("complemento")
 	            		 +" "+rs.getString("cidade")
 	            		 +" "+rs.getString("estado")
+	            		 +" "+rs.getString("dataAdmissao")
+	            		 +" "+rs.getString("ctps")
 	            		 );
 	         }
 	         rs.close();
@@ -184,6 +184,9 @@ public class AdministradorBO {
 	
 	public static void AdicionarDadosEmpresa() throws SQLException{
 		Empresa empresa = new Empresa();
+		
+		
+		
 		try {
 			java.sql.Statement stmt = AdministradorBO.conexao.createStatement();
 			stmt.executeUpdate("INSERT INTO empresa(cnpj,nome,telefone,cep,numero,bairro,complemento,cidade,estado)"
@@ -314,14 +317,17 @@ public class AdministradorBO {
 		cardapio.setNomeItemCardapio(leitura.nextLine());
 		System.out.println("Digite o Valor do Item do Cardapio: ");
 		cardapio.setValorItemCardapio(leitura.nextDouble());
+		System.out.println("Digite a Descrição do Item do Cardapio: ");
+		cardapio.setDescricaoItemCardapio(leitura.nextLine());
 		
 		java.sql.Statement stmt;
 		try {
 			stmt = AdministradorBO.conexao.createStatement();
-			stmt.executeUpdate("INSERT INTO cardapio(idItemCardapio,nomeItemCardapio,valorItemCardapio)"
+			stmt.executeUpdate("INSERT INTO cardapio(idItemCardapio,nomeItemCardapio,valorItemCardapio,descricaoItemCardapio)"
 								+ "VALUES('"+cardapio.getIdItemCardapio()+"','"
 											+cardapio.getNomeItemCardapio()+"','"
-											+cardapio.getValorItemCardapio()+"');");
+											+cardapio.getNomeItemCardapio()+"','"
+											+cardapio.getDescricaoItemCardapio()+"');");
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar Item ao Cardapio: "+e.getMessage());
 		}

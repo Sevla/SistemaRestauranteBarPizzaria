@@ -8,12 +8,14 @@ import br.com.SistemaRestauranteBarPizzaria.bo.AdministradorBO;
 import br.com.SistemaRestauranteBarPizzaria.dao.Login;
 
 public class Administrador extends Funcionario{
-	Scanner leitura = new Scanner(System.in);
+	static Connection conexao;
+	static Scanner leitura = new Scanner(System.in);
 	
-	public void OpcoesAdministrador(Connection conexao) throws SQLException{
+	public static void OpcoesAdministrador(Connection conexao) throws SQLException{
+		Administrador.conexao = conexao;
 		int opcao;
 		do{
-			System.out.println("Seja Bem-vindo Administrador "+getNome()+"!");
+			System.out.println("Seja Bem-vindo Administrador !");
 			System.out.println("Insira uma opção Administrativa abaixo:"
 					+ "[1]: Adicionar Funcionario;"
 					+ "[2]: Alterar dados de um Funcionario;"

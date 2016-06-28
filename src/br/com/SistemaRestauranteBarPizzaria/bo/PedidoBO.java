@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import br.com.SistemaRestauranteBarPizzaria.model.Administrador;
 import br.com.SistemaRestauranteBarPizzaria.model.Cardapio;
 import br.com.SistemaRestauranteBarPizzaria.model.Gerente;
 import br.com.SistemaRestauranteBarPizzaria.model.Pedido;
@@ -23,7 +22,7 @@ public class PedidoBO {
 		
 		System.out.println("Digite a quantidade de Itens Distintos do Pedido: ");
 		int quantidadeItensDistintos = leitura.nextInt();
-		java.sql.Statement stmt = Administrador.conexao.createStatement();
+		java.sql.Statement stmt = AdministradorBO.conexao.createStatement();
 		do{
 			System.out.println("Digite o ID do "+incremento+"o Item a Inserir no Pedido: ");
 			cardapio.setIdItemCardapio(leitura.nextInt());

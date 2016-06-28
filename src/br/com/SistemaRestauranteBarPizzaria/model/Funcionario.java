@@ -2,25 +2,21 @@ package br.com.SistemaRestauranteBarPizzaria.model;
 
 public class Funcionario extends DadosCadastrais{
 	public String dataAdmissao;
-	public double ctps;
-	public int tipoFuncionario;//Adimistrador ou Gerente
+	public String ctps;
 	
 	public String getDataAdmissao() {
 		return dataAdmissao;
 	}
-	public double getCtps() {
+	public String getCtps() {
 		return ctps;
-	}
-	public int getTipoFuncionario(){
-		return tipoFuncionario;
 	}
 	public void setNome(String nome){
 		this.nome = nome;
 	}
-	public void setTelefone(int telefone){
+	public void setTelefone(String telefone){
 		this.telefone = telefone;
 	}
-	public void setCep(int cep){
+	public void setCep(String cep){
 		this.cep = cep;
 	}
 	public void setNumero(int numero){
@@ -41,10 +37,7 @@ public class Funcionario extends DadosCadastrais{
 	public void setDataAdmissao(String dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
-	public void setCtps(double ctps) {
+	public void setCtps(String ctps) {
 		this.ctps = ctps;
-	}
-	public void setTipoFuncionario(int tipoFuncionario){
-		this.tipoFuncionario = tipoFuncionario;
 	}
 }

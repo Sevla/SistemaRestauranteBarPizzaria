@@ -1,23 +1,31 @@
 package br.com.SistemaRestauranteBarPizzaria.dao;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class ConexaoMySQL implements IConexao{
-	public static Connection conexao;
+public class ConexaoMySQL implements IConexao {
+	static Connection conexao;
 	
 	@Override
-	public synchronized Connection getConexao(String tipoBanco, String endereco, String nomeBanco,
-			String nomeUsuario, String senha) throws SQLException {
+	public synchronized Connection getConexao(String baseDados, String enderecoBanco, String nomeBanco, String usuario,
+			String senha) {
+		conexao = null;
 		try {
-			if(conexao == null) {
-				DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-				conexao = DriverManager.getConnection(tipoBanco+"://"+endereco+"/"+ nomeBanco, nomeUsuario, senha);
-			}
-			return conexao;
-		} catch(SQLException e) {
-			throw new SQLException("Erro ao conectar com o banco de dados: "+e.getMessage());
+			conexao = DriverManager.getConnection(baseDados+"://"+enderecoBanco+"/"+ nomeBanco, usuario, senha);
+			System.out.println("conectado a Base de Dados!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return conexao;
+	}
+	
+	public void fecharConexao() {
+		try {
+			ConexaoMySQL.conexao.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
+
 }

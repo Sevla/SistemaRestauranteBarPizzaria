@@ -3,7 +3,6 @@ package br.com.SistemaRestauranteBarPizzaria.bo;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import br.com.SistemaRestauranteBarPizzaria.model.Administrador;
 import br.com.SistemaRestauranteBarPizzaria.model.Pedido;
 import br.com.SistemaRestauranteBarPizzaria.model.Cliente;
 
@@ -12,7 +11,7 @@ public class ClienteBO {
 	public static Scanner leitura = new Scanner(System.in);
 	
 	public void VisualizarItensCardapio() throws SQLException{
-		Administrador.VisualizarItensCardapio();
+		AdministradorBO.VisualizarItensCardapio();
 	}
 	public void FormaPagamento() throws SQLException {
 		Pedido pedido = new Pedido();

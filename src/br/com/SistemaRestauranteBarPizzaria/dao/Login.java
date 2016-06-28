@@ -3,7 +3,6 @@ package br.com.SistemaRestauranteBarPizzaria.dao;
 import br.com.SistemaRestauranteBarPizzaria.bo.PedidoBO;
 import br.com.SistemaRestauranteBarPizzaria.model.Administrador;
 import br.com.SistemaRestauranteBarPizzaria.model.Gerente;
-import br.com.SistemaRestauranteBarPizzaria.model.Pedido;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,39 +13,57 @@ public class Login {
 	static Connection conexao;
 	static Scanner leitura = new Scanner(System.in);
 	static boolean isAdministrador;
+	static String usuarioDigitado;
+	static String senhaDigitada;
 	
 	public static void TelaDeLogin() throws SQLException{
 		int tentativas = 0;
-		String usernameDigitado;
-		String senhaDigitada;
 		
 		do{
 			System.out.println("Digite seu Username:");
-			usernameDigitado = leitura.nextLine();
+			usuarioDigitado = leitura.nextLine();
 			System.out.println("Digite sua senha:");
 			senhaDigitada = leitura.nextLine();
 			
-			if(usernameDigitado == null || senhaDigitada == null){
+			if(usuarioDigitado == null || senhaDigitada == null){
 				System.out.println("Username ou Senha Nulo!\nAcesso Negado!");
 			}
-			else if(ConferirUsername(usernameDigitado) && ConferirSenha(senhaDigitada)){
+			else if(ConferirUsername(usuarioDigitado) && ConferirSenha(senhaDigitada)){
 				System.out.println("Dado de login incorreto!");
 			}
 			else{
-				if(isAdministrador){
-					((Administrador) Administrador.conexao).OpcoesAdministrador(conexao);
+				if(IsAdministrador()){
+					Administrador.OpcoesAdministrador(conexao);
 				}
 				else{
-					((Gerente) Gerente.conexao).OpcoesGerente(conexao);
+					Gerente.OpcoesGerente(conexao);
 				}
-			}			
+			}
 			tentativas++;
 		}while(tentativas < 3);
+	}
+	public static Boolean IsAdministrador() throws SQLException{
+		boolean isAdministrador = false;
+		try {
+			java.sql.PreparedStatement pstm = conexao.prepareStatement("select isAdministrador from login where username='"+usuarioDigitado+"'");
+			ResultSet rs = pstm.executeQuery();
+			
+			if(!rs.next()) {
+				isAdministrador = false;
+			} else {
+				if(rs.getBoolean("isAdministrador")){
+					isAdministrador = true;
+				}
+			}
+			return isAdministrador;
+		} catch (SQLException e) {
+			throw new SQLException("Erro ao consultar booleano isAdministrador: "+e.getMessage());
+		}
 	}
 	public static boolean ConferirSenha(String senhaDigitada) throws SQLException{
 		boolean isSenhaCorreta = false;
 		try {
-			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from acessoAoSistema where senha='"+senhaDigitada+"'");
+			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from login where senha='"+senhaDigitada+"'");
 			ResultSet rs = pstm.executeQuery();
 			
 			if(!rs.next()) {
@@ -64,16 +81,16 @@ public class Login {
 			throw new SQLException("Erro ao consultar senha de login: "+e.getMessage());
 		}
 	}
-	public static boolean ConferirUsername(String usernameDigitado) throws SQLException{
+	public static boolean ConferirUsername(String usuarioDigitado) throws SQLException{
 		boolean isUsernameCorreto = false;
 		try {
-			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from acessoAoSistema where username='"+usernameDigitado+"'");
+			java.sql.PreparedStatement pstm = conexao.prepareStatement("select * from login where username='"+usuarioDigitado+"'");
 			ResultSet rs = pstm.executeQuery();
 			
 			if(!rs.next()) {
 				isUsernameCorreto = false;
 			} else {
-				if(usernameDigitado == rs.getString("username")){
+				if(usuarioDigitado == rs.getString("username")){
 					isUsernameCorreto = true;
 				}
 				else{
@@ -88,8 +105,11 @@ public class Login {
 	
 	public static void main(String[] args) throws SQLException {
 		ConexaoMySQL conectar = new ConexaoMySQL();
-		conectar.getConexao("jdbc:mysql", "localhost", "market", "root", "");
+		conectar.getConexao("jdbc:mysql", "localhost", "sistema", "root", "");
 		conexao = ConexaoMySQL.conexao;
+		
+		//TelaDeLogin();
+		
 		int opcao= 0;
 		do{
 			
@@ -97,6 +117,7 @@ public class Login {
 		System.out.println("Insira uma opção:");
 		System.out.println("[1] Cliente: Fazer pedido;"
 						 + "[2] Funcionário: Login ");
+		opcao = leitura.nextInt();
 		switch(opcao){
 		case 1: PedidoBO.AdicionarPedido();
 					break;
@@ -104,10 +125,7 @@ public class Login {
 					break;
 		default: System.out.println("Opção Invalida!");
 					break;
-					
-		
 				}
-		
 			}while(opcao!=3);
 		}
 }
