@@ -2,6 +2,7 @@ package br.com.SistemaRestauranteBarPizzaria.dao;
 
 import br.com.SistemaRestauranteBarPizzaria.model.Administrador;
 import br.com.SistemaRestauranteBarPizzaria.model.Gerente;
+import br.com.SistemaRestauranteBarPizzaria.model.Pedido;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -83,10 +84,29 @@ public class Login {
 			throw new SQLException("Erro ao consultar username de login: "+e.getMessage());
 		}
 	}
+	
 	public static void main(String[] args) throws SQLException {
 		ConexaoMySQL conectar = new ConexaoMySQL();
 		conectar.getConexao("jdbc:mysql", "localhost", "market", "root", "");
 		conexao = ConexaoMySQL.conexao;
-		TelaDeLogin();
-	}
+		int opcao= 0;
+		do{
+			
+		System.out.println("    #---- Sistema Restaurante ----#       ");
+		System.out.println("Insira uma opção:");
+		System.out.println("[1] Cliente: Fazer pedido;"
+						 + "[2] Funcionário: Login ");
+		switch(opcao){
+		case 1: Pedido.AdicionarPedido();
+					break;
+		case 2: TelaDeLogin();
+					break;
+		default: System.out.println("Opção Invalida!");
+					break;
+					
+		
+				}
+		
+			}while(opcao!=3);
+		}
 }
