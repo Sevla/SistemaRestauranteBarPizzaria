@@ -1,33 +1,33 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
 public class Cardapio {
-	protected int idItemCardapio;
-	protected String nomeItemCardapio;
-	protected double valorItemCardapio;
-	protected String descricaoItemCardapio;
+	public int idItemCardapio;
+	public String nomeItemCardapio;
+	public double valorItemCardapio;
+	public String descricaoItemCardapio;
 	
-	protected int getIdItemCardapio() {
+	public int getIdItemCardapio() {
 		return idItemCardapio;
 	}	
-	protected String getNomeItemCardapio() {
+	public String getNomeItemCardapio() {
 		return nomeItemCardapio;
 	}	
-	protected double getValorItemCardapio() {
+	public double getValorItemCardapio() {
 		return valorItemCardapio;
 	}	
-	protected String getDescricaoItemCardapio() {
+	public String getDescricaoItemCardapio() {
 		return descricaoItemCardapio;
 	}
-	protected void setIdItemCardapio(int idItemCardapio) {
+	public void setIdItemCardapio(int idItemCardapio) {
 		this.idItemCardapio = idItemCardapio;
 	}	
-	protected void setNomeItemCardapio(String nomeItemCardapio) {
+	public void setNomeItemCardapio(String nomeItemCardapio) {
 		this.nomeItemCardapio = nomeItemCardapio;
 	}	
-	protected void setValorItemCardapio(double valorItemCardapio) {
+	public void setValorItemCardapio(double valorItemCardapio) {
 		this.valorItemCardapio = valorItemCardapio;
 	}
-	protected void setDescricaoItemCardapio(String descricaoItemCardapio) {
+	public void setDescricaoItemCardapio(String descricaoItemCardapio) {
 		this.descricaoItemCardapio = descricaoItemCardapio;
 	}
 }

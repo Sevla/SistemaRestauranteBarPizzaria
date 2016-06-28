@@ -1,41 +1,41 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
 public class Funcionario extends DadosCadastrais{
-	protected String dataAdmissao;
-	protected double ctps;
-	protected int tipoFuncionario;//Adimistrador ou Gerente
+	public String dataAdmissao;
+	public double ctps;
+	public int tipoFuncionario;//Adimistrador ou Gerente
 	
-	protected String getDataAdmissao() {
+	public String getDataAdmissao() {
 		return dataAdmissao;
 	}
-	protected double getCtps() {
+	public double getCtps() {
 		return ctps;
 	}
-	protected int getTipoFuncionario(){
+	public int getTipoFuncionario(){
 		return tipoFuncionario;
 	}
-	protected void setNome(String nome){
+	public void setNome(String nome){
 		this.nome = nome;
 	}
-	protected void setTelefone(int telefone){
+	public void setTelefone(int telefone){
 		this.telefone = telefone;
 	}
-	protected void setCep(int cep){
+	public void setCep(int cep){
 		this.cep = cep;
 	}
-	protected void setNumero(int numero){
+	public void setNumero(int numero){
 		this.numero = numero;
 	}
-	protected void setBairro(String bairro){
+	public void setBairro(String bairro){
 		this.bairro = bairro;
 	}
-	protected void setComplemento(String complemento){
+	public void setComplemento(String complemento){
 		this.complemento = complemento;
 	}
-	protected void setCidade(String cidade){
+	public void setCidade(String cidade){
 		this.cidade = cidade;
 	}
-	protected void setEstado(String estado){
+	public void setEstado(String estado){
 		this.estado = estado;
 	}	
 	public void setDataAdmissao(String dataAdmissao) {
@@ -44,7 +44,7 @@ public class Funcionario extends DadosCadastrais{
 	public void setCtps(double ctps) {
 		this.ctps = ctps;
 	}
-	public void setTipoFuncionario(String tipoFuncionario){
+	public void setTipoFuncionario(int tipoFuncionario){
 		this.tipoFuncionario = tipoFuncionario;
 	}
 }

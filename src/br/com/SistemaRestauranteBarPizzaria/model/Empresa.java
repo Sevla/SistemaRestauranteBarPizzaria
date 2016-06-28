@@ -1,60 +1,60 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
 public class Empresa extends DadosCadastrais{
-	protected int cnpj;
+	public int cnpj;
 	
-	protected int getCnpj() {
+	public int getCnpj() {
 		return cnpj;
 	}
-	protected String getNome() {
+	public String getNome() {
 		return nome;
 	}	
-	protected int getTelefone() {
+	public int getTelefone() {
 		return telefone;
 	}	
-	protected int getCep() {
+	public int getCep() {
 		return cep;
 	}	
-	protected int getNumero() {
+	public int getNumero() {
 		return numero;
 	}	
-	protected String getBairro() {
+	public String getBairro() {
 		return bairro;
 	}	
-	protected String getComplemento() {
+	public String getComplemento() {
 		return complemento;
 	}
-	protected String getCidade() {
+	public String getCidade() {
 		return cidade;
 	}	
-	protected String getEstado() {
+	public String getEstado() {
 		return estado;
 	}
-	protected void setCnpj(int cnpj) {
+	public void setCnpj(int cnpj) {
 		this.cnpj = cnpj;
 	}
-	protected void setNome(String nome){
+	public void setNome(String nome){
 		this.nome = nome;
 	}
-	protected void setTelefone(int telefone){
+	public void setTelefone(int telefone){
 		this.telefone = telefone;
 	}
-	protected void setCep(int cep){
+	public void setCep(int cep){
 		this.cep = cep;
 	}
-	protected void setNumero(int numero){
+	public void setNumero(int numero){
 		this.numero = numero;
 	}
-	protected void setBairro(String bairro){
+	public void setBairro(String bairro){
 		this.bairro = bairro;
 	}
-	protected void setComplemento(String complemento){
+	public void setComplemento(String complemento){
 		this.complemento = complemento;
 	}
-	protected void setCidade(String cidade){
+	public void setCidade(String cidade){
 		this.cidade = cidade;
 	}
-	protected void setEstado(String estado){
+	public void setEstado(String estado){
 		this.estado = estado;
 	}
 }

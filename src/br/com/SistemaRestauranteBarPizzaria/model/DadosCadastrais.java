@@ -1,46 +1,46 @@
 package br.com.SistemaRestauranteBarPizzaria.model;
 
 public abstract class DadosCadastrais {
-	protected String nome;
-	protected int telefone;
-	protected int cep;
-	protected int numero;
-	protected String bairro;
-	protected String complemento;
-	protected String cidade;
-	protected String estado;
+	public String nome;
+	public int telefone;
+	public int cep;
+	public int numero;
+	public String bairro;
+	public String complemento;
+	public String cidade;
+	public String estado;
 	
-	protected String getNome() {
+	public String getNome() {
 		return nome;
 	}	
-	protected int getTelefone() {
+	public int getTelefone() {
 		return telefone;
 	}	
-	protected int getCep() {
+	public int getCep() {
 		return cep;
 	}	
-	protected int getNumero() {
+	public int getNumero() {
 		return numero;
 	}	
-	protected String getBairro() {
+	public String getBairro() {
 		return bairro;
 	}	
-	protected String getComplemento() {
+	public String getComplemento() {
 		return complemento;
 	}
-	protected String getCidade() {
+	public String getCidade() {
 		return cidade;
 	}	
-	protected String getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 	
-	protected abstract void setNome(String nome);
-	protected abstract void setTelefone(int telefone);
-	protected abstract void setCep(int cep);
-	protected abstract void setNumero(int numero);
-	protected abstract void setBairro(String bairro);
-	protected abstract void setComplemento(String complemento);
-	protected abstract void setCidade(String cidade);
-	protected abstract void setEstado(String estado);
+	public abstract void setNome(String nome);
+	public abstract void setTelefone(int telefone);
+	public abstract void setCep(int cep);
+	public abstract void setNumero(int numero);
+	public abstract void setBairro(String bairro);
+	public abstract void setComplemento(String complemento);
+	public abstract void setCidade(String cidade);
+	public abstract void setEstado(String estado);
 }
