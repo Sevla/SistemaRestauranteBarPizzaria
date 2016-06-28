@@ -1,5 +1,6 @@
 package br.com.SistemaRestauranteBarPizzaria.dao;
 
+import br.com.SistemaRestauranteBarPizzaria.bo.PedidoBO;
 import br.com.SistemaRestauranteBarPizzaria.model.Administrador;
 import br.com.SistemaRestauranteBarPizzaria.model.Gerente;
 import br.com.SistemaRestauranteBarPizzaria.model.Pedido;
@@ -97,7 +98,7 @@ public class Login {
 		System.out.println("[1] Cliente: Fazer pedido;"
 						 + "[2] Funcionário: Login ");
 		switch(opcao){
-		case 1: Pedido.AdicionarPedido();
+		case 1: PedidoBO.AdicionarPedido();
 					break;
 		case 2: TelaDeLogin();
 					break;

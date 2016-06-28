@@ -41,7 +41,7 @@ public class AdministradorBO {
 		
 		java.sql.Statement stmt;
 		try {
-			stmt = Administrador.conexao.createStatement();
+			stmt = AdministradorBO.conexao.createStatement();
 			stmt.executeUpdate("INSERT INTO funcionario(nome,telefone,cep,numero,bairro,complemento,cidade,estado,dataAdmissao,ctps)"
 								+ "VALUES('"+novoFuncionario.getNome()+"','"
 											+novoFuncionario.getTelefone()+"','"
@@ -63,8 +63,8 @@ public class AdministradorBO {
 		
 		java.sql.Statement stmt;
 		try {
-			stmt = Administrador.conexao.createStatement();
-			stmt.executeUpdate("DELETE FROM funcionario WHERE ctps="+ctps+";");
+			stmt = AdministradorBO.conexao.createStatement();
+			stmt.executeUpdate("DELETE FROM funcionario WHERE ctps="+ctps);
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Adicionar Funcionario: "+e.getMessage());
 		}
@@ -135,15 +135,15 @@ public class AdministradorBO {
 			
 			if(opcaoInvalida){
 				try {
-					java.sql.Statement stmt = Administrador.conexao.createStatement();
-					java.sql.PreparedStatement pstm = conexao.prepareStatement("select "+escolha+" FROM funcionario WHERE id='"+ctps+"'");
+					java.sql.Statement stmt = AdministradorBO.conexao.createStatement();
+					java.sql.PreparedStatement pstm = conexao.prepareStatement("select "+escolha+" FROM funcionario WHERE id="+ctps);
 					ResultSet rs = pstm.executeQuery();
 					rs.next();
 					if(opcaoDeAlteracao < 2 || opcaoDeAlteracao > 4){
-						stmt.executeUpdate("UPDATE funcionario SET "+escolha+"='"+alteracaoInt+"' WHERE id='"+ctps+"'");
+						stmt.executeUpdate("UPDATE funcionario SET "+escolha+"='"+alteracaoInt+"' WHERE id="+ctps);
 					}
 					else{
-						stmt.executeUpdate("UPDATE funcionario SET "+escolha+"='"+alteracaoString+"' WHERE id='"+ctps+"'");
+						stmt.executeUpdate("UPDATE funcionario SET "+escolha+"='"+alteracaoString+"' WHERE id="+ctps);
 					}
 					rs.close();
 			        pstm.close();
@@ -157,7 +157,7 @@ public class AdministradorBO {
 	}
 	public static void VisualizarFuncionarios() throws SQLException{
 		try{
-			java.sql.PreparedStatement pstm = Administrador.conexao.prepareStatement("select * from funcionario");
+			java.sql.PreparedStatement pstm = AdministradorBO.conexao.prepareStatement("select * from funcionario");
 			ResultSet rs = pstm.executeQuery();
 	        System.out.println("|    CTPS    |         NOME         |     DATA ADMISSAO     |     TELEFONE     |     CEP     |     NUM     |     BAIRRO     |     COMPLEMENTO     |     CIDADE     |     ESTADO     |");
 	        while (rs.next()) {
@@ -185,7 +185,7 @@ public class AdministradorBO {
 	public static void AdicionarDadosEmpresa() throws SQLException{
 		Empresa empresa = new Empresa();
 		try {
-			java.sql.Statement stmt = Administrador.conexao.createStatement();
+			java.sql.Statement stmt = AdministradorBO.conexao.createStatement();
 			stmt.executeUpdate("INSERT INTO empresa(cnpj,nome,telefone,cep,numero,bairro,complemento,cidade,estado)"
 								+ "VALUES('"+empresa.getCnpj()+"','"
 											+empresa.getNome()+"','"
@@ -237,8 +237,7 @@ public class AdministradorBO {
 					+ "[7]: Alterar o complemento da Empresa;"
 					+ "[8]: Alterar o cidade da Empresa;"
 					+ "[9]: Alterar o estado da Empresa;"
-					+ "[10]: Alterar a data de admissão da Empresa;"
-					+ "[11]: Sair.");
+					+ "[10]: Sair.");
 			opcaoDeAlteracao = leitura.nextInt();
 			switch(opcaoDeAlteracao){
 				case 1:
@@ -277,10 +276,6 @@ public class AdministradorBO {
 					System.out.println("Digite o novo estado do Funcionario: ");
 					alteracaoString = leitura.nextLine();
 					escolha = "estado";
-				case 10:
-					System.out.println("Digite a nova data de admissão do Funcionario: ");
-					alteracaoString = leitura.nextLine();
-					escolha = "dataAdmissao";
 				default:
 					System.out.println("Opção Inválida!");
 					opcaoInvalida = false;
@@ -288,15 +283,15 @@ public class AdministradorBO {
 			
 			if(opcaoInvalida){
 				try {
-					java.sql.Statement stmt = Administrador.conexao.createStatement();
-					java.sql.PreparedStatement pstm = conexao.prepareStatement("select "+escolha+" FROM empresa WHERE id='"+cnpj+"'");
+					java.sql.Statement stmt = AdministradorBO.conexao.createStatement();
+					java.sql.PreparedStatement pstm = conexao.prepareStatement("select "+escolha+" FROM empresa WHERE id="+cnpj);
 					ResultSet rs = pstm.executeQuery();
 					rs.next();
 					if(opcaoDeAlteracao < 2 || opcaoDeAlteracao > 4){
-						stmt.executeUpdate("UPDATE empresa SET "+escolha+"='"+alteracaoInt+"' WHERE id='"+cnpj+"'");
+						stmt.executeUpdate("UPDATE empresa SET "+escolha+"='"+alteracaoInt+"' WHERE id="+cnpj);
 					}
 					else{
-						stmt.executeUpdate("UPDATE empresa SET "+escolha+"='"+alteracaoString+"' WHERE id='"+cnpj+"'");
+						stmt.executeUpdate("UPDATE empresa SET "+escolha+"='"+alteracaoString+"' WHERE id="+cnpj);
 					}
 					rs.close();
 			        pstm.close();
@@ -322,7 +317,7 @@ public class AdministradorBO {
 		
 		java.sql.Statement stmt;
 		try {
-			stmt = Administrador.conexao.createStatement();
+			stmt = AdministradorBO.conexao.createStatement();
 			stmt.executeUpdate("INSERT INTO cardapio(idItemCardapio,nomeItemCardapio,valorItemCardapio)"
 								+ "VALUES('"+cardapio.getIdItemCardapio()+"','"
 											+cardapio.getNomeItemCardapio()+"','"
@@ -336,8 +331,8 @@ public class AdministradorBO {
 		int itemRemocao = leitura.nextInt();
 		java.sql.Statement stmt;
 		try {
-			stmt = Administrador.conexao.createStatement();
-			stmt.executeUpdate("DELETE FROM cardapio WHERE idItemCardapio ="+itemRemocao+";");
+			stmt = AdministradorBO.conexao.createStatement();
+			stmt.executeUpdate("DELETE FROM cardapio WHERE idItemCardapio ="+itemRemocao);
 								
 		} catch (SQLException e) {
 			throw new SQLException("Erro ao Remover Item do Cardapio: "+e.getMessage());
@@ -345,7 +340,7 @@ public class AdministradorBO {
 	}	
 	public static void VisualizarItensCardapio() throws SQLException{
 		try{
-			java.sql.PreparedStatement pstm = Administrador.conexao.prepareStatement("select * from empresa");
+			java.sql.PreparedStatement pstm = AdministradorBO.conexao.prepareStatement("select * from cardapio");
 			ResultSet rs = pstm.executeQuery();
 	        System.out.println("|    ID    |         NOME         |     VALOR    |");
 	        while (rs.next()) {
@@ -398,14 +393,14 @@ public class AdministradorBO {
 			if(opcaoInvalida){
 				try {
 					java.sql.Statement stmt = conexao.createStatement();
-					java.sql.PreparedStatement pstm = conexao.prepareStatement("select "+escolha+" FROM cardapio WHERE id='"+idProduto+"'");
+					java.sql.PreparedStatement pstm = conexao.prepareStatement("select "+escolha+" FROM cardapio WHERE id="+idProduto);
 					ResultSet rs = pstm.executeQuery();
 					rs.next();
 					if(opcaoDeAlteracao==1 || opcaoDeAlteracao==3){
-						stmt.executeUpdate("UPDATE cardapio SET "+escolha+"='"+alteracaoString+"' WHERE id='"+idProduto+"'");
+						stmt.executeUpdate("UPDATE cardapio SET "+escolha+"='"+alteracaoString+"' WHERE id="+idProduto);
 					}
 					else{
-						stmt.executeUpdate("UPDATE cardapio SET "+escolha+"='"+alteracaoDouble+"' WHERE id='"+idProduto+"'");
+						stmt.executeUpdate("UPDATE cardapio SET "+escolha+"='"+alteracaoDouble+"' WHERE id="+idProduto);
 					}
 					rs.close();
 			        pstm.close();
